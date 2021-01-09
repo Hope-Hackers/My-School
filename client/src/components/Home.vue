@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>
+    <!-- <div>
       <div>
         <b-navbar toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">My School</b-navbar-brand>
@@ -19,20 +19,20 @@
                   <b-dropdown-item>School vacation</b-dropdown-item>
                 </b-dropdown>
               
-                <!-- <router-link to='/'>Home</router-link>
-                <router-link to='/>School Life</router-link>
+                <router-link to='/'>Home</router-link>
+                <router-link to='/'>School Life</router-link>
                 <router-link to='/'>Services</router-link>
-                <router-link to='/'>Activities</router-link> -->
+                <router-link to='/'>Activities</router-link>
             </b-navbar-nav>
-            <!-- Right aligned nav items -->
+            Right aligned nav items
             <b-navbar-nav class="ml-auto navLink">
-                <!-- <a href="./login">Login</a>                 -->
                 <router-link to='/login'>Login</router-link>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>       
       </div>
-    </div><br>
+    </div> -->
+    <br>
     <b-container class="bv-example-row">
       <b-row class="text-center">
         <b-col cols="12">
