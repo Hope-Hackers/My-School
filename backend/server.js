@@ -3,13 +3,13 @@ const connectDB = require("./config/db");
 const teacher = require("./models/teacher");
 const admin = require("./models/admin");
 const app = express();
-
+const cors = require("cors");
 // DB Connection
 connectDB();
-
+app.use(cors());
 
 // Init Middleware
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: true }));
 
 app.get("/", (req, res) => res.send("API Running"));
 

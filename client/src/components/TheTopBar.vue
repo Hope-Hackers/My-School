@@ -12,13 +12,23 @@
     <div>
       <fa-icon class="icon-circle" :icon="['fas', 'search']" size="2x" />
       <fa-icon class="icon-circle" :icon="['fas', 'bell']" size="2x" />
-      <fa-icon class="icon-circle" :icon="['fas', 'power-off']" size="2x" />
+      <fa-icon
+        class="icon-circle"
+        :icon="['fas', 'power-off']"
+        size="2x"
+        @click="redirect"
+      />
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "TheTopBar",
+  methods: {
+    redirect() {
+      this.$router.push("/Login");
+    },
+  },
 };
 </script>
 

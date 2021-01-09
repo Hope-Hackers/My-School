@@ -39,26 +39,22 @@ router.post(
 
     try {
       let user = await User.findOne({ email }).exec();
-
       // Check if user exists
 
       if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Invalid Credentials" }] });
+        return res.send({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
       // Check password match
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Invalid Credentials" }] });
+        return res.send({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
       // JWT Token generation
-      await user.save();
+      //this should be taken into consideration
+      // await user.save();
       const payload = {
         user: {
           id: user.id,
@@ -70,12 +66,12 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.send({ token });
         }
       );
     } catch (err) {
       console.log(err.message);
-      res.status(500).send("Server error");
+      res.send("Server error");
     }
   }
 );

@@ -12,10 +12,11 @@
             grow
           >
             <v-tabs-slider color="purple darken-4"></v-tabs-slider>
-            <v-tab v-for="i in tabs" :key="i.id">
+            <v-tab v-for="i in tabs" @click="redirect(i.name)" :key="i.id">
               <v-icon large>{{ i.icon }}</v-icon>
-              <div class="caption py-1">{{ i.name }}</div>
+              <div v-if="i.name" class="caption py-1">{{ i.name }}</div>
             </v-tab>
+
             <v-tab-item>
               <v-card class="px-4">
                 <v-card-text>
@@ -93,9 +94,9 @@
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
-                          v-model="childrenId"
+                          v-model="childId"
                           :rules="rules.required"
-                          label="Children-Id"
+                          label="Child-Id"
                           required
                         ></v-text-field>
                       </v-col>
@@ -127,6 +128,9 @@
                       </v-col>
                       <v-spacer></v-spacer>
                       <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+                        <p v-if="created">
+                          User Created successfully
+                        </p>
                         <v-btn
                           x-large
                           block
@@ -148,6 +152,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import { mdiAccount, mdiAccountOutline, mdiHome } from "@mdi/js";
 export default {
   computed: {
     passwordMatch() {
@@ -155,13 +161,48 @@ export default {
     },
   },
   methods: {
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
+    redirect(e) {
+      if (e) {
+        this.$router.push(`${e}`);
+      } else {
+        this.$router.push("/");
       }
     },
-    reset() {
-      this.$refs.form.reset();
+    validate() {
+      if (this.$refs.loginForm.validate()) {
+        axios
+          .post("http://localhost:5000/api/auth", {
+            email: this.loginEmail,
+            password: this.loginPassword,
+          })
+          .then((response) => {
+            localStorage.setItem("token", response.data.token);
+            this.$router.push("/");
+          });
+      } else {
+        axios
+          .post("http://localhost:5000/api/register", {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            childId: this.childId,
+            password: this.password,
+          })
+          .then((response) => {
+            console.log(response);
+            this.resetRegister();
+            this.created = true;
+            setTimeout(() => {
+              this.created = false;
+            }, 4000);
+          });
+      }
+    },
+    resetLogin() {
+      this.$refs.loginForm.reset();
+    },
+    resetRegister() {
+      this.$refs.registerForm.reset();
     },
     resetValidation() {
       this.$refs.form.resetValidation();
@@ -170,15 +211,17 @@ export default {
   data: () => ({
     dialog: true,
     tab: 0,
+    created: false,
     tabs: [
-      { name: "Login", icon: "mdi-account" },
-      { name: "Register", icon: "mdi-account-outline" },
+      { name: "Login", icon: mdiAccount },
+      { name: "Register", icon: mdiAccountOutline },
+      { icon: mdiHome },
     ],
     valid: true,
     firstName: "",
     lastName: "",
     email: "",
-    childrenId: "",
+    childId: "",
     password: "",
     verify: "",
     loginPassword: "",
@@ -200,3 +243,17 @@ export default {
   }),
 };
 </script>
+<style>
+.v-application .deep-purple.accent-4 {
+  background-color: #0e0e0e !important;
+  border-color: #070707 !important;
+}
+.v-application .purple.darken-4 {
+  background-color: #0c0c0c !important;
+  border-color: #040404 !important;
+}
+.v-application .success {
+  background-color: #2f3133 !important;
+  border-color: #2f3133 !important;
+}
+</style>

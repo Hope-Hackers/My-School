@@ -12,8 +12,12 @@ const User = require("../../models/User");
 router.post(
   "/",
   [
-    check("firstName", "firstName is required").not().isEmpty(),
-    check("lastName", "lastName is required").not().isEmpty(),
+    check("firstName", "firstName is required")
+      .not()
+      .isEmpty(),
+    check("lastName", "lastName is required")
+      .not()
+      .isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check("password", "Please enter a password").isLength({ min: 8 }),
     check("childId", "Please enter a childId").isLength({ min: 6 }),
@@ -21,7 +25,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.send({ errors: errors.array() });
     }
 
     const { firstName, lastName, email, password, childId } = req.body;
@@ -32,9 +36,7 @@ router.post(
       // Check if user exists
 
       if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "User alredy exists" }] });
+        return res.send({ errors: [{ msg: "User alredy exists" }] });
       }
       // Instance User
 
@@ -64,7 +66,7 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.send({ token });
         }
       );
     } catch (err) {

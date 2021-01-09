@@ -8,13 +8,20 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: () => import("./components/Home.vue"),
+      component: () => import("./Home.vue"),
       index: 0,
+      children: [
+        {
+          path: "/Login",
+          component: () => import("./components/Login.vue"),
+          index: 0,
+        },
+        {
+          path: "/Register",
+          component: () => import("./components/Login.vue"),
+          index: 1,
+        },
+      ],
     },
-    {
-        path: "/login",
-        component: () => import("./components/Login.vue"),
-        index:1
-    }
   ],
 });
