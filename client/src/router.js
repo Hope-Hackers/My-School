@@ -21,6 +21,16 @@ export default new Router({
           component: () => import("./components/Login.vue"),
           index: 1,
         },
+        {
+          path: "/Profil",
+          component: () => import("./components/profil/Profil.vue"),
+          index: 2,
+        },
+        {
+          path: "/ChatContainer",
+          component: () => import("./components/profil/ChatContainer.vue"),
+          index: 3,
+        },
       ],
     },
   ],

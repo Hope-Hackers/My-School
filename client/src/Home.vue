@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <TheTopbar @togglenav="navOpen = !navOpen" />
-    <TheSidebar :open="navOpen" />
+    <TheTopBar @togglenav="navOpen = !navOpen" />
+    <TheSideBar :open="navOpen" />
     <router-view></router-view>
   </div>
 </template>
 <script>
-import TheTopbar from "./components/TheTopBar";
-import TheSidebar from "./components/TheSideBar";
+import TheTopBar from "./components/TheTopBar.vue";
+import TheSideBar from "./components/TheSideBar.vue";
 
 export default {
   name: "App",
@@ -17,8 +17,8 @@ export default {
     };
   },
   components: {
-    TheTopbar,
-    TheSidebar,
+    TheTopBar,
+    TheSideBar,
   },
 };
 </script>
@@ -40,7 +40,7 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
-  background: url("./assets/class1.jpg") center center;
+  // background: url("./assets/class1.jpg") center center;
   background-size: cover;
 }
 </style>

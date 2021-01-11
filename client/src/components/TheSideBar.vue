@@ -7,10 +7,15 @@
           href="#"
           class="sidebar-element"
           v-for="(item, index) in navElements"
-          :key="item"
+          :key="item.icon"
           :style="{ '--index': index }"
         >
-          <fa-icon class="icon" :icon="['fas', item]" size="2x" />
+          <fa-icon
+            class="icon"
+            :icon="['fas', item.icon]"
+            @click="item.redirect"
+            size="2x"
+          />
         </a>
       </transition-group>
     </div>
@@ -21,16 +26,63 @@
 export default {
   name: "TheSideBar",
   props: ["open"],
-  data: () => {
+  methods: {
+    redirectProfil() {
+      this.$router.push({ path: "/Profil", addToHistory: false });
+    },
+    redirectMessages() {
+      this.$router.push({ path: "/ChatContainer", addToHistory: false });
+    },
+    redirectHome() {
+      this.$router.push({ path: "/", addToHistory: false });
+    },
+  },
+  data() {
     return {
       navElements: [
-        "home",
-        "user",
-        "cogs",
-        "th",
-        "share-alt",
-        "star",
-        "comment",
+        {
+          icon: "home",
+          redirect: () => {
+            this.redirectHome();
+          },
+        },
+        {
+          icon: "user",
+          redirect: () => {
+            this.redirectProfil();
+          },
+        },
+        {
+          icon: "comments",
+          redirect: () => {
+            this.redirectMessages();
+          },
+        },
+
+        {
+          icon: "lightbulb",
+          redirect: () => {
+            this.redirectMessages();
+          },
+        },
+        {
+          icon: "calendar",
+          redirect: () => {
+            this.redirectMessages();
+          },
+        },
+        {
+          icon: "clipboard",
+          redirect: () => {
+            this.redirectMessages();
+          },
+        },
+        {
+          icon: "cogs",
+          redirect: () => {
+            this.redirectMessages();
+          },
+        },
       ],
     };
   },
@@ -45,7 +97,7 @@ export default {
   position: relative;
   flex-direction: column;
   width: 60px;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 50px); // make display component when open slidebar
   padding-top: 48px;
   background-color: rgba($color: #242424, $alpha: 0.6);
 
@@ -58,7 +110,6 @@ export default {
     margin-bottom: 8px;
     cursor: pointer;
     color: #fefefe;
-    background-color: #242424;
   }
 }
 

@@ -14,7 +14,7 @@
       <fa-icon class="icon-circle" :icon="['fas', 'bell']" size="2x" />
       <fa-icon
         class="icon-circle"
-        :icon="['fas', 'power-off']"
+        :icon="['fas', 'sign-in-alt']"
         size="2x"
         @click="redirect"
       />

@@ -34,7 +34,7 @@
                         <v-text-field
                           v-model="loginPassword"
                           :append-icon="show1 ? 'eye' : 'eye-off'"
-                          :rules="rules"
+                          :rules="[rules.required, rules.min]"
                           :type="show1 ? 'text' : 'password'"
                           name="input-10-1"
                           label="Password"
@@ -69,7 +69,7 @@
                       <v-col cols="12" sm="6" md="6">
                         <v-text-field
                           v-model="firstName"
-                          :rules="rules"
+                          :rules="[rules.required]"
                           label="First Name"
                           maxlength="20"
                           required
@@ -78,7 +78,7 @@
                       <v-col cols="12" sm="6" md="6">
                         <v-text-field
                           v-model="lastName"
-                          :rules="rules"
+                          :rules="[rules.required]"
                           label="Last Name"
                           maxlength="20"
                           required
@@ -95,7 +95,7 @@
                       <v-col cols="12">
                         <v-text-field
                           v-model="childId"
-                          :rules="rules"
+                          :rules="rules.required"
                           label="Child-Id"
                           required
                         ></v-text-field>
@@ -104,7 +104,7 @@
                         <v-text-field
                           v-model="password"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                          :rules="rules"
+                          :rules="[rules.required, rules.min]"
                           :type="show1 ? 'text' : 'password'"
                           name="input-10-1"
                           label="Password"
@@ -118,7 +118,7 @@
                           block
                           v-model="verify"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                          :rules="[passwordMatch] && rules"
+                          :rules="[rules.required, passwordMatch]"
                           :type="show1 ? 'text' : 'password'"
                           name="input-10-1"
                           label="Confirm Password"
@@ -234,11 +234,12 @@ export default {
       (v) => !!v || "Required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
-    rules: [
-      (value) => !!value || "Required.",
-      (v) => (v && v.length >= 8) || "Min 8 characters",
-    ],
+
     show1: false,
+    rules: {
+      required: (value) => !!value || "Required.",
+      min: (v) => (v && v.length >= 8) || "Min 8 characters",
+    },
   }),
 };
 </script>
