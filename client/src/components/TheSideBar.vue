@@ -36,6 +36,9 @@ export default {
     redirectHome() {
       this.$router.push({ path: "/", addToHistory: false });
     },
+    redirectContactUs() {
+      this.$router.push({ path: "/ContactUs", addToHistory: false });
+    },
   },
   data() {
     return {
@@ -80,7 +83,7 @@ export default {
         {
           icon: "cogs",
           redirect: () => {
-            this.redirectMessages();
+            this.redirectContactUs();
           },
         },
       ],

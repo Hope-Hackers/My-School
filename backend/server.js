@@ -7,6 +7,7 @@ const cors = require("cors");
 // DB Connection
 connectDB();
 app.use(cors());
+app.use(express.json())
 
 // Init Middleware
 app.use(express.json({ extended: true }));
@@ -16,6 +17,7 @@ app.get("/", (req, res) => res.send("API Running"));
 // Define routes
 app.use("/api/register", require("./routes/api/register"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/contact", require("./routes/api/contact"));
 
 const PORT = process.env.PORT || 5000;
 

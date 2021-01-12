@@ -31,6 +31,11 @@ export default new Router({
           component: () => import("./components/profil/ChatContainer.vue"),
           index: 3,
         },
+        {
+          path: "/ContactUs",
+          component: () => import("./components/ContactUs.vue"),
+          index: 4,
+        },
       ],
     },
   ],
