@@ -2,7 +2,7 @@
   <div class="chat-container">
     <div class="heading">
       <!-- uuid : unique user ID -->
-      <h1>{{ " User: " + uuid }}</h1> 
+      <h1>{{ " User ID: " + uuid }}</h1>
     </div>
     <div class="body">
       <div class="table">

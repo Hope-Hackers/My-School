@@ -1,33 +1,3 @@
-// import Vue from "vue";
-// import App from "./App.vue";
-// import "./icons";
-
-// import Vuetify from "vuetify";
-// import "vuetify/dist/vuetify.min.css";
-
-// import router from "./router.js";
-
-// import Vuesax from "vuesax";
-// import "vuesax/dist/vuesax.css";
-
-// import store from "./store.js";
-
-// Vue.use(Vuetify);
-// Vue.use(Vuesax);
-
-// Vue.config.productionTip = false;
-
-// new Vue({
-//   router,
-//   store,
-//   parent,
-
-//   render: (h) => h(App),
-//   vuetify: new Vuetify(),
-// }).$mount("#app");
-
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import App from "./App.vue";
 import "./icons";
