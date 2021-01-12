@@ -19,7 +19,12 @@ export default new Router({
         {
             path: "/signup",
             component: () => import("./components/Signup.vue"),
-            index:1
+            index:2
+        },
+        {
+            path: "/teacher/schedule",
+            component: () => import("./components/Teacher/Teacher.vue"),
+            index: 2,
         }
     ]
 });
