@@ -12,6 +12,7 @@ import "vuesax/dist/vuesax.css";
 
 import store from "./store.js";
 import PubNubVue from "pubnub-vue";
+import "boxicons/css/boxicons.min.css";
 
 Vue.use(Vuetify);
 Vue.use(Vuesax);

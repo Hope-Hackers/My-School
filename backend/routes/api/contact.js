@@ -13,7 +13,7 @@ router.post("/ContactUs", async (req, res) => {
     },
     (err, doc) => {
       if (!err) {
-        console.log("success");
+        res.send("success");
       }
     }
   );

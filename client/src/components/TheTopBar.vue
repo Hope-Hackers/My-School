@@ -7,6 +7,7 @@
         :icon="['fas', 'bars']"
         size="2x"
         @click="$emit('togglenav')"
+        id="test"
       />
     </div>
     <div>
@@ -32,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .topbar {
   display: flex;
   justify-content: space-between;

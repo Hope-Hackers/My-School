@@ -12,17 +12,17 @@ export default new Router({
       index: 0,
       children: [
         {
-          path: "/Login",
+          path: "Login",
           component: () => import("./components/Login.vue"),
           index: 0,
         },
         {
-          path: "/Register",
+          path: "Register",
           component: () => import("./components/Login.vue"),
           index: 1,
         },
         {
-          path: "/Profil",
+          path: "Profil",
           component: () => import("./components/profil/Profil.vue"),
           index: 2,
         },

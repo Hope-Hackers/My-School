@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div class="background" id="app">
     <TheTopBar @togglenav="navOpen = !navOpen" />
-    <TheSideBar :open="navOpen" />
+    <TheSideBar />
     <router-view></router-view>
   </div>
 </template>
@@ -40,7 +40,9 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
-  // background: url("./assets/class1.jpg") center center;
   background-size: cover;
 }
+// .background {
+//   background: url("./assets/class1.jpg") center center;
+// }
 </style>

@@ -79,17 +79,16 @@ export default {
         for (let field in this.contact) {
           form.append(field, this.contact[field]);
         }
-/*name: "",
-      Lname: "",
-      email: "",
-      message: "", */
+
         // Send form to server
         axios
           .post("http://localhost:5000/api/contact/ContactUs", this.contact)
           .then((response) => {
-            console.log(response);
-            this.clearForm();
-            this.isSending = false;
+            if (response) {
+              console.log(response.data);
+              this.clearForm();
+              this.isSending = false;
+            }
           })
           .catch((e) => {
             console.log(e);
