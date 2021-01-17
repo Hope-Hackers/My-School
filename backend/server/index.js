@@ -14,8 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/administrators", routes.administratorRoutes);
-
 app.use("/api/users", routes.userRoutes);
+app.use("/api/schedule", routes.scheduleRoutes);
+app.use("/api/grades", routes.gradesRoutes);
 
 var server = app.listen(PORT, (err) => {
   if (!err) {
