@@ -2,7 +2,8 @@
   
   <div v-if='this.logged == false'>
     <v-container>
-        <v-form>
+      <v-card>
+        <v-form class="pa-6 ma-10">
             <v-text-field v-model="input.email" label="Email" />
             <v-text-field v-model="input.password" 
                         label="Password" 
@@ -12,6 +13,7 @@
 
             <v-btn v-on:click="login()">Login</v-btn>
         </v-form>
+      </v-card>
     </v-container>
   </div>
   <div v-else><Home /></div>

@@ -2,7 +2,9 @@
 
     <div>
     <v-container>
-        <v-form>
+        <v-card >
+          
+        <v-form class="pa-6 ma-10">
             <v-text-field  v-model="signup.firstName" label="First Name" />
             <v-text-field  v-model="signup.lastName" label="Last Name" />
             <v-text-field  v-model="signup.email" label="Email" />
@@ -18,6 +20,8 @@
 
             <v-btn v-on:click="signUp()">Sign up</v-btn>
         </v-form>
+        
+        </v-card>
     </v-container>
   </div>
 

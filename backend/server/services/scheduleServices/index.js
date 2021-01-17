@@ -1,10 +1,14 @@
-const Schedules = require("../../../database/models/schedule");
+const Schedules = require("../../../database/models/schedule.js");
 
 module.exports = {
+    async findAllSchedulesWithoutId(){
+        return Schedules.find({}).select("-_id");
+    },
   async findAllSchedules() {
-    return Schedules.find({});
+    return Schedules.find({})
   },
-  async createSchedule(schedule) {
+    async createSchedule(schedule) {
+      console.log(schedule)
     return Schedules.create(schedule);
   },
 };

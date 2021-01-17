@@ -1,5 +1,6 @@
 module.exports = {
   administratorServices: require("./administratorServices"),
   userServices: require("./userServices"),
-  scheduleServices: require("./scheduleServices")
+  scheduleServices: require("./scheduleServices"),
+  gradesServices: require("./gradesServices")
 };

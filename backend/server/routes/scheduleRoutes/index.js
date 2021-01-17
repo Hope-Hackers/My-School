@@ -4,21 +4,21 @@ const services = require("../../services");
 
 router.get("/", async (req, res) => {
   try {
-    var Schedules = await services.scheduleServices.findAllSchedules();
+    var Schedules = await services.scheduleServices.findAllSchedulesWithoutId();
     res.send(Schedules);
   } catch (error) {
     res.send(error);
   }
 });
-
-// const Schedule = require('../../../database/models/schedule')
-// router.get('/', async (req, res) => {
-//   await Schedule.find({}, (err, db) => {
-//       if(!err) {
-//           res.send(db)
-//       }
-//   })
-// })
+router.post('/create',async (req,res) => {
+  try {
+    console.log('req',req.body)
+    var newSchedule = await services.scheduleServices.createSchedule(req.body)
+    res.send(newSchedule);
+  } catch (err) {
+    res.send(err)
+  }
+})
 
 // router.post("/createAdministrator", async (req, res) => {
 //   try {
