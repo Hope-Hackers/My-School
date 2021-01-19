@@ -35,6 +35,7 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // background: url("./assets/class1.jpg") center center;
 }
 
 #app {
@@ -42,7 +43,4 @@ body {
   min-height: 100vh;
   background-size: cover;
 }
-// .background {
-//   background: url("./assets/class1.jpg") center center;
-// }
 </style>
