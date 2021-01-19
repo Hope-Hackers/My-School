@@ -2,16 +2,16 @@
   <div class="chat-log" ref="chatLogContainer">
     <message-bubble
       v-for="historyMsg in history"
-      :key="historyMsg.id"
-      :uuid="historyMsg.uuid"
-      :text="historyMsg.text"
+      :key="historyMsg._id"
+      :uuid="historyMsg.senderId"
+      :text="historyMsg.message"
     ></message-bubble>
 
     <message-bubble
-      v-for="msg in vueChatMsg"
-      :key="msg.id"
-      :uuid="msg.message.uuid"
-      :text="msg.message.text"
+      v-for="historyMsg in vueChatMsg"
+      :key="historyMsg._id"
+      :uuid="historyMsg.senderId"
+      :text="historyMsg.message"
     ></message-bubble>
   </div>
 </template>
@@ -19,6 +19,7 @@
 <script>
 import MessageBubble from "./MessageBubble.vue";
 import { mapGetters } from "vuex";
+import io from "socket.io-client";
 
 /**
  * Auto scrolls the chat log to the bottom when a new message is received
@@ -37,9 +38,10 @@ export default {
        * display messages as soon as they are received.
        */
 
-      vueChatMsg: this.$pnGetMessage("vueChat"),
+      vueChatMsg: [],
     };
   },
+
   watch: {
     vueChatMsg: function() {
       this.$nextTick(scrollBottom);
@@ -48,13 +50,25 @@ export default {
   computed: {
     ...mapGetters({
       history: "getHistoryMsgs",
+      uuid: "getMyUuid",
+      room: "getroom",
     }),
+  },
+  mounted() {
+    let socket = io("http://localhost:7000/", { transport: ["websocket"] });
+    socket.on("newmsg", (data) => {
+      if (
+        (data.senderId == this.uuid && data.receiverId == this.room) ||
+        (data.receiverId == this.uuid && data.senderId == this.room)
+      ) {
+        this.vueChatMsg.push(data);
+      }
+    });
   },
 };
 </script>
 
 <style scoped>
-
 .chat-log {
   display: block;
   height: inherit;

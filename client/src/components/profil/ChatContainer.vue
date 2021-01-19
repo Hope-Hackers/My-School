@@ -16,26 +16,18 @@
 <script>
 import ChatLog from "./ChatLog.vue";
 import MessageInput from "./MessageInput.vue";
-import PubNubVue from "pubnub-vue";
 import { mapGetters } from "vuex";
+import axios from "axios";
 
-function fetchHistory(store) {
-  PubNubVue.getInstance().history(
-    {
-      channel: "vueChat",
-      count: 6, // how many items to fetch
-      stringifiedTimeToken: true, // false is the default
+// import io from "socket.io-client";
+/*new Vue({
+
+  methods: {
+    clickButton: function(data) {
+      this.$socket.emit(" emit_method ", data);
     },
-    function(status, response) {
-      const msgs = response.messages;
-      console.log(msgs);
-      // Iterate msgs array and save each element to history
-      msgs.forEach((elem) => {
-        store.commit("addHistory", { history: [elem] });
-      });
-    }
-  );
-}
+  },
+});*/
 
 export default {
   name: "chat-container",
@@ -45,19 +37,27 @@ export default {
   },
   data() {
     return {
-      title: "PubNub & Vue Global Chat ",
+      
+      isConnected: false,
     };
   },
   mounted() {
-    // Subscribe to PubNub
-    this.$pnSubscribe({
-      channels: ["vueChat"],
-    });
-    this.$nextTick(fetchHistory(this.$store));
+    axios
+      .get(
+        `http://localhost:7000/api/messages/getMessages?id1=${this.uuid}&id2=${this.receivedId}`
+      )
+      .then((response) => {
+        const msgs = response.data;
+        // Iterate msgs array and save each element to history
+        msgs.forEach((elem) => {
+          this.$store.commit("addHistory", { history: [elem] });
+        });
+      });
   },
   computed: {
     ...mapGetters({
       uuid: "getMyUuid",
+      receivedId: "getroom",
     }),
   },
 };

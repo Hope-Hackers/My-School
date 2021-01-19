@@ -66,7 +66,11 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.send({ token });
+          res.send({
+            token: token,
+            messangerId: user.messangerId,
+            username: user.firstName + " " + user.lastName,
+          });
         }
       );
     } catch (err) {

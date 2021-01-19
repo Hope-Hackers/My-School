@@ -9,6 +9,7 @@
           />
         </vs-avatar>
       </template>
+      <h2>{{ this.name }}</h2>
       <vs-sidebar-item id="home">
         <template #icon>
           <i class="bx bx-home" @click="redirectHome"></i>
@@ -19,7 +20,7 @@
         <template #icon>
           <i class="bx bxs-user-rectangle" @click="redirectProfil"></i>
         </template>
-        Profile
+        Teachers
       </vs-sidebar-item>
       <vs-sidebar-item id="chat">
         <template #icon>
@@ -99,20 +100,32 @@
 export default {
   data: () => ({
     active: "home",
+    name: "",
   }),
   methods: {
     redirectHome() {
+      console.log(this.name);
       this.$router.push("/");
     },
     redirectProfil() {
       this.$router.push("/Profil");
     },
     redirectChatContainer() {
+      this.$store.commit("setroom", 5106);
       this.$router.push("/ChatContainer");
     },
     redirectContactUs() {
       this.$router.push("/ContactUs");
     },
   },
+  mounted() {
+    this.name = localStorage.getItem("Username");
+  },
 };
 </script>
+<style >
+h2 {
+    margin-left: 55px;
+    margin-bottom: 10px;
+}
+</style>

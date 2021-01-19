@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "message-input",
   data() {
@@ -29,15 +30,14 @@ export default {
       }
 
       const userUUID = this.$store.getters.getMyUuid;
+      const room = this.$store.getters.getroom;
 
       // console.log(even.target.value);
       // Publish to PubNub the text and user's uuid
-      this.$pnPublish({
-        channel: "vueChat",
-        message: {
-          text: event.target.value,
-          uuid: userUUID,
-        },
+      axios.post("http://localhost:7000/api/messages/postMessage", {
+        text: event.target.value,
+        uuid: userUUID,
+        receiverId: room,
       });
 
       // Reset the text input

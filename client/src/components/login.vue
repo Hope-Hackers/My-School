@@ -171,17 +171,19 @@ export default {
     validate() {
       if (this.$refs.loginForm.validate()) {
         axios
-          .post("http://localhost:5000/api/auth", {
+          .post("http://localhost:7000/api/auth", {
             email: this.loginEmail,
             password: this.loginPassword,
           })
           .then((response) => {
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("messangerId", response.data.messangerId);
+            localStorage.setItem("Username", response.data.username);
             this.$router.push("/");
           });
       } else {
         axios
-          .post("http://localhost:5000/api/register", {
+          .post("http://localhost:7000/api/register", {
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
