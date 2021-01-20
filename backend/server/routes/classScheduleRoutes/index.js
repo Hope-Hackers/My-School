@@ -4,20 +4,20 @@ const services = require("../../services");
 
 router.get("/", async (req, res) => {
   try {
-    var Schedules = await services.scheduleServices.findAllSchedulesWithoutId();
-    res.send(Schedules);
+    var ClassSchedules = await services.classScheduleServices.findAllClassSchedulesWithoutId();
+    res.send(ClassSchedules);
   } catch (error) {
-    res.send(error);
+    console.log(error);
   }
 });
 
 router.post('/create',async (req,res) => {
   try {
     console.log('req',req.body)
-    var newSchedule = await services.scheduleServices.createSchedule(req.body)
-    res.send(newSchedule);
+    var newClassSchedule = await services.classScheduleServices.createClassSchedule(req.body)
+    res.send(newClassSchedule);
   } catch (err) {
-    res.send(err)
+    console.log(err)
   }
 })
 

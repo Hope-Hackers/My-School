@@ -2,6 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="students"
+    :search="search"
     sort-by="moyenne"
     class="elevation-1"
   >
@@ -15,6 +16,14 @@
           inset
           vertical
         ></v-divider>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"          
+          single-line
+          hide-details
+        ></v-text-field>
         <v-spacer></v-spacer>
         <v-dialog
           v-model="dialog"
@@ -155,6 +164,7 @@
   export default {
     name: 'TeacherGrades',
     data: () => ({
+      search: '',
       dialog: false,
       dialogDelete: false,
       fetched:false,
@@ -212,94 +222,39 @@
     methods: {
       initialize () {
         this.students = this.items
-        // [
-          // {
-          //   name: 'Khaled Yeferni',
-          //   moyenne: 18,
-          //   maths: 16.0,
-          //   sciences: 20,
-          //   physics: 18.0,
-          // },
-          // {
-          //   name: 'Melek Houidi',
-          //   moyenne: 15,
-          //   maths: 15,
-          //   sciences: 15,
-          //   physics: 15,
-          // },
-          // {
-          //   name: 'Zied Sradki',
-          //   moyenne: 14,
-          //   maths: 14,
-          //   sciences: 14,
-          //   physics: 14,
-          // },
-          // {
-          //   name: 'Wael Jouini',
-          //   moyenne: 12,
-          //   maths: 12,
-          //   sciences: 12,
-          //   physics: 12,
-          // },
-          // {
-          //   name: 'Ahmed Lahmer',
-          //   moyenne: 13,
-          //   maths: 13,
-          //   sciences: 13,
-          //   physics: 13,
-          // },
-          // {
-          //   name: 'Bedis Zitoun',
-          //   moyenne: 17,
-          //   maths: 17,
-          //   sciences: 17,
-          //   physics: 17,
-          // },
-          // {
-          //   name: 'Hichem Samti',
-          //   moyenne: 16.5,
-          //   maths: 18,
-          //   sciences: 16,
-          //   physics: 17,
-          // },
-          // {
-          //   name: 'Dheker Lazrek',
-          //   moyenne: 15.5,
-          //   maths: 18,
-          //   sciences: 15,
-          //   physics: 14,
-          // },
-          // {
-          //   name: 'Aziz Dhaoui',
-          //   moyenne: 16,
-          //   maths: 16,
-          //   sciences: 16,
-          //   physics: 16,
-          // },
-          // {
-          //   name: 'Anas Fallah',
-          //   moyenne: 12.5,
-          //   maths: 10,
-          //   sciences: 12,
-          //   physics: 16,
-          // },
-        // ]
       },
 
       editItem (item) {
         this.editedIndex = this.students.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        this.editedItem = item
         this.dialog = true
       },
 
       deleteItem (item) {
         this.editedIndex = this.students.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        this.editedItem = item
         this.dialogDelete = true
       },
 
-      deleteItemConfirm () {
-        this.students.splice(this.editedIndex, 1)
+      async deleteItemConfirm () {
+        console.log(this.editedItem)
+        var deleted = await axios.delete(`http://localhost:3000/api/grades/delete/${this.editedItem._id}`)
+        if(deleted.data.status) {
+          this.$vs.notify({
+              text:"Deleted successfully",
+              title:"Notification",
+              position:"top-right",
+              color:"success"
+          })
+          this.students.splice(this.editedIndex, 1)
+        }else{
+          this.$vs.notify({
+              text:"Try again later",
+              title:"Notification",
+              position:"top-right",
+              color:"danger"
+          })
+        }
         this.closeDelete()
       },
 
@@ -319,11 +274,51 @@
         })
       },
 
-      save () {
+      async save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.students[this.editedIndex], this.editedItem)
+          for(var key in this.editedItem){
+            if(typeof this.editedItem[key] == "string" && Number(this.editedItem[key])) {
+              this.editedItem[key]=Number(this.editedItem[key])
+            }
+          }
+          var updated = await axios.post('http://localhost:3000/api/grades/update', this.editedItem)
+          if(updated.data.status) {
+            this.$vs.notify({
+              text:"Updated successfully",
+              title:"Notification",
+              position:"top-right",
+              color:"success"
+            })
+            this.students[this.editedIndex] = this.editedItem
+          } else {
+            this.$vs.notify({
+              text:"Try again later",
+              title:"Notification",
+              position:"top-right",
+              color:"danger"
+            })
+          }
         } else {
+          var created = await axios.post('http://localhost:3000/api/grades/create',this.editedItem)
+          console.log (created.data)
+          if(created.data.status) {
+            this.$vs.notify({
+              text:"Added successfully",
+              title:"Notification",
+              position:"top-right",
+              color:"success"
+            })
+            this.editedItem = created.data.newGrade
           this.students.push(this.editedItem)
+          } else {
+            this.$vs.notify({
+              text:"Try again later",
+              title:"Notification",
+              position:"top-right",
+              color:"danger"
+            })
+          }
+          
         }
         this.close()
       },
@@ -331,9 +326,10 @@
 
     async mounted () {
       var grade = await axios.get('http://localhost:3000/api/grades')
-        for (var i = 0; i < grade.data.length; i++){
-          this.items.push(grade.data[i])
-        }
+        // for (var i = 0; i < grade.data.length; i++){
+        //   this.items.push(grade.data[i])
+        // }
+        this.students = grade.data
         console.log (grade.data);
         this.fetched = true;
     }

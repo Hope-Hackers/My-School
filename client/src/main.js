@@ -8,12 +8,16 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
+
+import 'vuesax/dist/vuesax.css' 
+
 import Vuetify from 'vuetify';
 
+import Vuesax from 'vuesax'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-
+Vue.use(Vuesax)
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
