@@ -2,7 +2,7 @@ const Schedules = require("../../../database/models/schedule.js");
 
 module.exports = {
     async findAllSchedulesWithoutId(){
-        return Schedules.find({}).select("-_id");
+        return Schedules.find({},{_id:0}).sort({"Time":1});
     },
   async findAllSchedules() {
     return Schedules.find({})

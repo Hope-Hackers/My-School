@@ -15,10 +15,28 @@ router.post('/create', async (req, res) => {
     try {
         console.log('req', req.body)
         var newGrade = await services.gradesServices.createGrade(req.body)
-        res.send(newGrade);
+        res.send({newGrade,status:true});
     } catch (err) {
         res.send(err)
     }
 });
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        await services.gradesServices.deleteGrade({ _id: req.params.id })
+        res.send({status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
+
+router.post('/update', async (req, res) => {
+    try {
+        var newGrade = await services.gradesServices.updateGrade(req.body)
+        res.send({newGrade,status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
 
 module.exports = router;

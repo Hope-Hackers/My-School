@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>My Schedule :</h3>
+        <h5>My Class Schedule :</h5>
         <br/>
         <div>
             <b-table hover :items="items"></b-table>
@@ -11,7 +11,7 @@
 <script>
     import axios from "axios";
     export default {
-        name: 'TeacherSchedule',
+        name: 'ClassSchedule',
         components: {
         },
         data() {
@@ -21,7 +21,7 @@
             }
         },
         async mounted() {
-                var schedule = await axios.get('http://localhost:3000/api/schedule')
+                var schedule = await axios.get('http://localhost:3000/api/classschedule')
                     this.items = schedule.data
                     console.log(schedule.data)
                     this.fetched=true                   
