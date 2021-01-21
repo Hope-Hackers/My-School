@@ -1,43 +1,45 @@
 <template>
   <div class="Profiles">
-    <v-card class="mx-auto1" max-width="434" tile>
-      <v-img
-        height="100%"
-        src="https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
-      >
-        <v-row align="end" class="fill-height">
-          <v-col align-self="start" class="pa-0" cols="12">
-            <v-avatar class="profile" color="grey" size="164" tile>
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
-              ></v-img>
-            </v-avatar>
-          </v-col>
+    <div class="pro1">
+      <v-card class="mx-auto1" max-width="434" tile>
+        <v-img
+          height="100%"
+          src="https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
+        >
+          <v-row align="end" class="fill-height">
+            <v-col align-self="start" class="pa-0" cols="12">
+              <v-avatar class="profile" color="grey" size="164" tile>
+                <v-img
+                  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
+                ></v-img>
+              </v-avatar>
+            </v-col>
 
-          <v-col class="py-0">
-            <v-list-item color="rgba(0, 0, 0, .4)" dark>
-              <v-list-item-content>
-                <v-list-item-title class="title">
-                  Melek Houidi
-                </v-list-item-title>
+            <v-col class="py-0">
+              <v-list-item color="rgba(0, 0, 0, .4)" dark>
+                <v-list-item-content>
+                  <v-list-item-title class="title">
+                    Melek Houidi
+                  </v-list-item-title>
 
-                <v-list-item-subtitle>English teacher</v-list-item-subtitle>
-                <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
-                    Message
-                  </v-btn>
-                </div>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-        </v-row>
-        <div class="details">
-          <v-btn depressed color="primary" @click="redirectDetails">
-            Details
-          </v-btn>
-        </div>
-      </v-img>
-    </v-card>
+                  <v-list-item-subtitle>English teacher</v-list-item-subtitle>
+                  <div class="btn">
+                    <v-btn depressed color="primary" @click="redirectMessages">
+                      Message
+                    </v-btn>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-col>
+          </v-row>
+          <div class="details">
+            <v-btn depressed color="primary" @click="redirectDetails">
+              Details
+            </v-btn>
+          </div>
+        </v-img>
+      </v-card>
+    </div>
 
     <v-card class="mx-auto2" max-width="434" tile>
       <v-img
@@ -178,19 +180,22 @@ export default {
   min-height: 100vh;
   background: url("./image/1.jpg") center center;
   background-size: cover;
+  padding-top: 30px;
 }
 .mx-auto1.v-card.v-sheet.theme--light.rounded-0 {
   margin-left: 490px;
   height: 237px;
+  height: 250px;
 }
 .mx-auto2.v-card.v-sheet.theme--light.rounded-0 {
-  margin-left: 490px;
-  margin-top: 180px;
+  margin-left: 491px;
+  margin-top: 42px;
+  height: 250px;
 }
 .mx-auto3.v-card.v-sheet.theme--light.rounded-0 {
   margin-left: 1033px;
-  margin-top: -584px;
-  height: 226px;
+  margin-top: -538px;
+  height: 244px;
 }
 .mx-auto4.v-card.v-sheet.theme--light.rounded-0 {
   margin-left: 1035px;
