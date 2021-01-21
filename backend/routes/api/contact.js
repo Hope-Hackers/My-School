@@ -18,4 +18,9 @@ router.post("/ContactUs", async (req, res) => {
     }
   );
 });
+router.get("/ContactUs", async (req, res) => {
+  let contactadmins = await Contact.find();
+  console.log(contactadmins, "contactadmins");
+  res.json(contactadmins);
+});
 module.exports = router;

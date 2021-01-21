@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-html {
+/* html {
   overflow: hidden !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -24,5 +24,5 @@ html::-webkit-scrollbar {
 }
 #app {
   width: 100%;
-}
+} */
 </style>

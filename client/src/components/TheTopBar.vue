@@ -2,13 +2,6 @@
   <div class="topbar">
     <div>
       <!-- npm from child componect to the Vue (big component parent or other components to communicate) -->
-      <fa-icon
-        class="icon"
-        :icon="['fas', 'bars']"
-        size="2x"
-        @click="$emit('togglenav')"
-        id="test"
-      />
     </div>
     <div>
       <fa-icon class="icon-circle" :icon="['fas', 'search']" size="2x" />

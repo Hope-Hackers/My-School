@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("config");
 // const db = config.get("mongoURI");
-const db = "mongodb+srv://school:zs23101995@cluster0.nuv5y.mongodb.net/test";
+const db = "mongodb+srv://school:zs23101995@cluster0.nuv5y.mongodb.net/school";
 const connectDB = async () => {
   try {
     await mongoose.connect(db, {

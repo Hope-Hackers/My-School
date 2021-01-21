@@ -14,8 +14,15 @@ import store from "./store.js";
 import PubNubVue from "pubnub-vue";
 import "boxicons/css/boxicons.min.css";
 
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "@mdi/font/css/materialdesignicons.css";
+
 Vue.use(Vuetify);
 Vue.use(Vuesax);
+Vue.use(BootstrapVue);
+
 Vue.config.productionTip = false;
 
 const publish_Key = "pub-c-fa43105c-ed88-47fb-a5f1-04b3a289feb3";
@@ -62,6 +69,10 @@ new Vue({
   router,
   store,
   render: (h) => h(App),
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({
+    icons: {
+      iconfont: "mdiSvg", // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    },
+  }),
   created,
 }).$mount("#app");

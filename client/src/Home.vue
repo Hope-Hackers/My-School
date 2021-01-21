@@ -1,24 +1,26 @@
 <template>
-  <div class="background" id="app">
-    <TheTopBar @togglenav="navOpen = !navOpen" />
+  <div id="app">
+    <TheTopBar />
     <TheSideBar />
+    <!-- <ContactAdmin /> -->
     <router-view></router-view>
   </div>
 </template>
+//
 <script>
 import TheTopBar from "./components/TheTopBar.vue";
 import TheSideBar from "./components/TheSideBar.vue";
+// import ContactAdmin from "./components/admin/ContactAdmin.vue";
 
 export default {
   name: "App",
   data: () => {
-    return {
-      navOpen: false,
-    };
+    return {};
   },
   components: {
     TheTopBar,
     TheSideBar,
+    // ContactAdmin,
   },
 };
 </script>

@@ -36,6 +36,11 @@ export default new Router({
           component: () => import("./components/ContactUs.vue"),
           index: 4,
         },
+        {
+          path: "/Teacher",
+          component: () => import("./components/Teacher/Teacher.vue"),
+          index: 5,
+        },
       ],
     },
   ],

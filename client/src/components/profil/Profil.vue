@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <v-card class="mx-auto" max-width="434" tile>
+  <div class="Profiles">
+    <v-card class="mx-auto1" max-width="434" tile>
       <v-img
         height="100%"
-        src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
+        src="https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
       >
         <v-row align="end" class="fill-height">
           <v-col align-self="start" class="pa-0" cols="12">
@@ -31,10 +31,15 @@
             </v-list-item>
           </v-col>
         </v-row>
+        <div class="details">
+          <v-btn depressed color="primary" @click="redirectDetails">
+            Details
+          </v-btn>
+        </div>
       </v-img>
     </v-card>
 
-    <v-card class="mx-auto" max-width="434" tile>
+    <v-card class="mx-auto2" max-width="434" tile>
       <v-img
         height="100%"
         src="https://ak.picdn.net/shutterstock/videos/27266011/thumb/1.jpg"
@@ -65,9 +70,14 @@
             </v-list-item>
           </v-col>
         </v-row>
+        <div class="details">
+          <v-btn depressed color="primary" @click="redirectDetails">
+            Details
+          </v-btn>
+        </div>
       </v-img>
     </v-card>
-    <v-card class="mx-auto2" max-width="434" tile>
+    <v-card class="mx-auto3" max-width="434" tile>
       <v-img
         height="100%"
         src="https://www.publicdomainpictures.net/pictures/130000/velka/abstract-wallpaper-1442844611tgq.jpg"
@@ -96,9 +106,14 @@
             </v-list-item>
           </v-col>
         </v-row>
+        <div class="details">
+          <v-btn depressed color="primary" @click="redirectDetails">
+            Details
+          </v-btn>
+        </div>
       </v-img>
     </v-card>
-    <v-card class="mx-auto3" max-width="434" tile>
+    <v-card class="mx-auto4" max-width="434" tile>
       <v-img
         height="100%"
         src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v748-toon-131_1_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=c03f4e1df88801665806cbdbaef503d4"
@@ -129,6 +144,11 @@
             </v-list-item>
           </v-col>
         </v-row>
+        <div class="details">
+          <v-btn depressed color="primary" @click="redirectDetails">
+            Details
+          </v-btn>
+        </div>
       </v-img>
     </v-card>
   </div>
@@ -142,6 +162,10 @@ export default {
       this.$store.commit("setroom", 123);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
+    redirectDetails() {
+      this.$store.commit("setroom", 123);
+      this.$router.push({ path: "/Teacher", addToHistory: false });
+    },
   },
   data() {
     return {};
@@ -149,23 +173,45 @@ export default {
 };
 </script>
 <style>
-body {
-  width: 100%;
+.Profiles {
+  min-width: 100%;
   min-height: 100vh;
+  background: url("./image/1.jpg") center center;
   background-size: cover;
-  /* background: url("./image/mm.jpg") center center; */
 }
-.mx-auto.v-card.v-sheet.theme--light.rounded-0 {
-  margin-left: 90px;
-  margin-bottom: 50px;
-  margin-top: 25px;
+.mx-auto1.v-card.v-sheet.theme--light.rounded-0 {
+  margin-left: 490px;
+  height: 237px;
 }
 .mx-auto2.v-card.v-sheet.theme--light.rounded-0 {
-  margin-left: 1035px;
-  margin-top: -675px;
+  margin-left: 490px;
+  margin-top: 180px;
 }
 .mx-auto3.v-card.v-sheet.theme--light.rounded-0 {
+  margin-left: 1033px;
+  margin-top: -584px;
+  height: 226px;
+}
+.mx-auto4.v-card.v-sheet.theme--light.rounded-0 {
   margin-left: 1035px;
   margin-top: 48px;
+}
+.pa-0.col.col-12.align-self-start {
+  margin-left: -195px;
+  margin-top: 15px;
+}
+.v-list-item__content {
+  margin-left: -25px;
+  margin-top: 50px;
+}
+button.v-btn.v-btn--has-bg.theme--light.v-size--default.primary {
+  background: black;
+}
+.details {
+  margin-left: -164px;
+}
+.btn {
+  margin-left: -32px;
+  margin-top: 40px;
 }
 </style>

@@ -37,7 +37,6 @@ export default {
   },
   data() {
     return {
-      
       isConnected: false,
     };
   },
@@ -82,6 +81,7 @@ h1 {
   background-color: #ffffff;
   border: solid 1px #bfbfbf;
   border-radius: 3px;
+  margin-top: 53px;
 }
 
 .heading {

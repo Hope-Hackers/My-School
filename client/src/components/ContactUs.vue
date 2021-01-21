@@ -82,7 +82,7 @@ export default {
 
         // Send form to server
         axios
-          .post("http://localhost:5000/api/contact/ContactUs", this.contact)
+          .post("http://localhost:7000/api/contact/ContactUs", this.contact)
           .then((response) => {
             if (response) {
               console.log(response.data);
