@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://school:zs23101995@cluster0.nuv5y.mongodb.net/school?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}

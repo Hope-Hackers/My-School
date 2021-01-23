@@ -2,27 +2,31 @@
   <div class="topbar">
     <div>
       <!-- npm from child componect to the Vue (big component parent or other components to communicate) -->
-      <fa-icon
-        class="icon"
-        :icon="['fas', 'bars']"
-        size="2x"
-        @click="$emit('togglenav')"
-      />
     </div>
     <div>
       <fa-icon class="icon-circle" :icon="['fas', 'search']" size="2x" />
       <fa-icon class="icon-circle" :icon="['fas', 'bell']" size="2x" />
-      <fa-icon class="icon-circle" :icon="['fas', 'power-off']" size="2x" />
+      <fa-icon
+        class="icon-circle"
+        :icon="['fas', 'sign-in-alt']"
+        size="2x"
+        @click="redirect"
+      />
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "TheTopBar",
+  methods: {
+    redirect() {
+      this.$router.push("/Login");
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .topbar {
   display: flex;
   justify-content: space-between;
