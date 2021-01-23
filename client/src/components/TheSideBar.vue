@@ -70,12 +70,6 @@
         </template>
         Event
       </vs-sidebar-item>
-      <vs-sidebar-item id="shopping">
-        <template #icon>
-          <i class="bx bxs-shopping-bags"></i>
-        </template>
-        Shopping
-      </vs-sidebar-item>
       <vs-sidebar-item id="Contact Us">
         <template #icon>
           <i class="bx bx-support" @click="redirectContactUs"></i>
@@ -112,7 +106,7 @@ export default {
     },
     redirectChatContainer() {
       this.$store.commit("setroom", 5106);
-      this.$router.push("/ChatContainer");
+      this.$router.push("/ChatStructure");
     },
     redirectContactUs() {
       this.$router.push("/ContactUs");
@@ -123,9 +117,9 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 h2 {
-    margin-left: 55px;
-    margin-bottom: 10px;
+  margin-left: 55px;
+  margin-bottom: 10px;
 }
 </style>

@@ -41,6 +41,11 @@ export default new Router({
           component: () => import("./components/Teacher/Teacher.vue"),
           index: 5,
         },
+        {
+          path: "/ChatStructure",
+          component: () => import("./components/profil/ChatStructure.vue"),
+          index: 5,
+        },
       ],
     },
   ],

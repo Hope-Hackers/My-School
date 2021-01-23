@@ -210,10 +210,12 @@ export default {
   margin-top: 50px;
 }
 button.v-btn.v-btn--has-bg.theme--light.v-size--default.primary {
-  background: black;
+  background: #a51515a1;
+  border-radius: 30px;
 }
 .details {
-  margin-left: -164px;
+  margin-left: -163px;
+  margin-top: -36px;
 }
 .btn {
   margin-left: -32px;
