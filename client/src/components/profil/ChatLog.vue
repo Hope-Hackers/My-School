@@ -54,6 +54,7 @@ export default {
       room: "getroom",
     }),
   },
+  //Check recently received messages and put them inside Chat room
   mounted() {
     let socket = io("http://localhost:7000/", { transport: ["websocket"] });
     socket.on("newmsg", (data) => {
@@ -64,6 +65,7 @@ export default {
         this.vueChatMsg.push(data);
       }
     });
+    
   },
 };
 </script>

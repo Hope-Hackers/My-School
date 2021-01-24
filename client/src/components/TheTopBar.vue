@@ -20,6 +20,7 @@ export default {
   name: "TheTopBar",
   methods: {
     redirect() {
+      localStorage.clear();
       this.$router.push("/Login");
     },
   },

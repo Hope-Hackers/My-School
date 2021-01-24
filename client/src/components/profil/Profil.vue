@@ -24,7 +24,7 @@
 
                   <v-list-item-subtitle>English teacher</v-list-item-subtitle>
                   <div class="btn">
-                    <v-btn depressed color="primary" @click="redirectMessages">
+                    <v-btn depressed color="primary" @click="redirectMessages(123)">
                       Message
                     </v-btn>
                   </div>
@@ -64,7 +64,7 @@
 
                 <v-list-item-subtitle>physics teacher </v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn depressed color="primary" @click="redirectMessages(133)">
                     Message
                   </v-btn>
                 </div>
@@ -100,7 +100,7 @@
 
                 <v-list-item-subtitle>Arabic teacher</v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn depressed color="primary" @click="redirectMessages(143)">
                     Message
                   </v-btn>
                 </div>
@@ -138,7 +138,11 @@
 
                 <v-list-item-subtitle>Sports teacher</v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(153)"
+                  >
                     Message
                   </v-btn>
                 </div>
@@ -160,12 +164,11 @@
 export default {
   name: "Profil",
   methods: {
-    redirectMessages() {
-      this.$store.commit("setroom", 123);
+    redirectMessages(x) {
+      this.$store.commit("setroom", x);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
     redirectDetails() {
-      this.$store.commit("setroom", 123);
       this.$router.push({ path: "/Teacher", addToHistory: false });
     },
   },

@@ -41,12 +41,14 @@ export default {
     };
   },
   mounted() {
+    this.$store.commit("clearHistory");
+    //Request the messages of the current Teacher from the server
     axios
       .get(
         `http://localhost:7000/api/messages/getMessages?id1=${this.uuid}&id2=${this.receivedId}`
       )
       .then((response) => {
-        const msgs = response.data;
+        const msgs = response.data.reverse();
         // Iterate msgs array and save each element to history
         msgs.forEach((elem) => {
           this.$store.commit("addHistory", { history: [elem] });

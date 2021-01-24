@@ -20,7 +20,7 @@
               :key="item.name"
             >
               <td>{{ item.name }}</td>
-              <v-btn class="redmsg" @click="redirectMsg">
+              <v-btn class="redmsg" @click="redirectMsg(item.id)">
                 Message
               </v-btn>
             </tr>
@@ -38,22 +38,26 @@ export default {
       ChatTeachers: [
         {
           name: "Melek Houidi",
+          id:123
         },
         {
           name: "Khaled Yeferni ",
+          id:133
         },
         {
           name: "Zied sradki ",
+          id:143
         },
         {
           name: "Wael Jouini ",
+          id:153
         },
       ],
     };
   },
   methods: {
-    redirectMsg() {
-      this.$store.commit("setroom", 123);
+    redirectMsg(x) {
+      this.$store.commit("setroom", x);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
   },

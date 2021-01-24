@@ -105,7 +105,6 @@ export default {
       this.$router.push("/Profil");
     },
     redirectChatContainer() {
-      this.$store.commit("setroom", 5106);
       this.$router.push("/ChatStructure");
     },
     redirectContactUs() {

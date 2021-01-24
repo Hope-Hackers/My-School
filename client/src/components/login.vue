@@ -180,6 +180,7 @@ export default {
             localStorage.setItem("messangerId", response.data.messangerId);
             localStorage.setItem("Username", response.data.username);
             this.$router.push("/");
+            window.location.reload();
           });
       } else {
         axios

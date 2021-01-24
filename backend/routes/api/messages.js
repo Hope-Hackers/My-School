@@ -27,14 +27,12 @@ router.get("/getMessages", async (req, res) => {
     receiverId: req.query.id2,
   })
     .sort({ date: -1 })
-    .limit(4)
     .exec();
   let messe = await Messages.find({
     receiverId: req.query.id1,
     senderId: req.query.id2,
   })
     .sort({ date: -1 })
-    .limit(4)
     .exec();
   messe.forEach((elem) => {
     mess.push(elem);
