@@ -20,7 +20,9 @@ export default {
     };
   },
   async mounted() {
-    var schedule = await axios.get("http://localhost:7000/api/classschedule");
+    var schedule = await axios.get(
+      "http://localhost:7000/api/classschedule/findwithoutid"
+    );
     this.items = schedule.data;
     console.log(schedule.data);
     this.fetched = true;

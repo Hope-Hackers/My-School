@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden">
+  <div v-if="this.name" class="hidden">
     <vs-sidebar absolute hover-expand reduce v-model="active" open>
       <template #logo>
         <vs-avatar>

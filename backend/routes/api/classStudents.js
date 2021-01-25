@@ -1,29 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const services = require("../../models/schedule");
+const services = require("../../models/classStudents");
 
 router.get("/", async (req, res) => {
   try {
-    var Schedules = await services.find({}, { _id: 0 }).sort({ Time: 1 });
-    res.send(Schedules);
+    var ClassStudents = await services.find({});
+    res.send(ClassStudents);
   } catch (error) {
-    res.send(error);
+    console.log(error);
   }
 });
 
 router.post("/create", async (req, res) => {
   try {
     console.log("req", req.body);
-    var newSchedule = await services.create(req.body);
-    res.send(newSchedule);
+    var newClassStudent = await services.create(req.body);
+    res.send(newClassStudent);
   } catch (err) {
-    res.send(err);
+    console.log(err);
   }
 });
 
 router.delete("/delete/:id", async (req, res) => {
   try {
-    await services.deleteOne({_id: req.params.id});
+    await services.deleteOne({ _id: req.params.id });
     res.send({ status: true });
   } catch (err) {
     res.send({ err, status: false });
@@ -32,9 +32,8 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    var newSchedule = await services.findOneAndUpdate({_id: req.body._id},req.body,{useFindAndModify: false});
-    console.log(newSchedule);
-    res.send({ newSchedule, status: true });
+    var newStudent = await services.findByIdAndUpdate({_id: req.body._id},req.body,{});
+    res.send({ newStudent, status: true });
   } catch (err) {
     res.send({ err, status: false });
   }

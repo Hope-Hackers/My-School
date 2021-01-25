@@ -46,6 +46,16 @@ export default new Router({
           component: () => import("./components/profil/ChatStructure.vue"),
           index: 6,
         },
+        {
+          path: "/admin",
+          component: () => import("./components/admin/Admin.vue"),
+          index: 7,
+        },
+        {
+          path: "/ContactAdmin",
+          component: () => import("./components/admin/ContactAdmin.vue"),
+          index: 8,
+        },
       ],
     },
   ],

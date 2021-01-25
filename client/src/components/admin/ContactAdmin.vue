@@ -1,18 +1,17 @@
 <template>
   <div class="container">
-    <b-tabs content-class="mt-3" align="center">
-      <b-tab title="Contact" active
-        ><p class="admintext">All Contact here :</p>
+    
+      
+        <p class="admintext">All Contact here :</p>
         <ul v-for="item in contact" :key="item">
           <li>First Name : {{ item.name }}</li>
           <li>Last Name : {{ item.Lname }}</li>
           <li>Email : {{ item.email }}</li>
           <li>Message : {{ item.message }}</li>
-          <hr /></ul
-      ></b-tab>
-      <b-tab title="schedule"><p>schedule here</p></b-tab>
-      <b-tab title="Event"><p>Event here</p></b-tab>
-    </b-tabs>
+          <hr /></ul>
+    
+
+   
   </div>
 </template>
 
