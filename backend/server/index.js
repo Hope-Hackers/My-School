@@ -18,6 +18,7 @@ app.use("/api/users", routes.userRoutes);
 app.use("/api/schedule", routes.scheduleRoutes);
 app.use("/api/grades", routes.gradesRoutes);
 app.use("/api/classschedule", routes.classScheduleRoutes);
+app.use("/api/classstudents", routes.classStudentsRoutes);
 
 var server = app.listen(PORT, (err) => {
   if (!err) {

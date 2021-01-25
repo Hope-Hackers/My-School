@@ -24,7 +24,12 @@ export default new Router({
         {
             path: "/teacher/schedule",
             component: () => import("./components/Teacher/Teacher.vue"),
-            index: 2,
+            index: 3,
+        },
+        {
+            path: "/admin",
+            component: () => import("./components/admin/Admin.vue"),
+            index: 4,
         }
     ]
 });

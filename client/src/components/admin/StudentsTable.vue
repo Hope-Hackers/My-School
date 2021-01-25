@@ -3,14 +3,14 @@
     :headers="headers"
     :items="students"
     :search="search"
-    sort-by="moyenne"
+    sort-by="name"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar
         flat
       >
-        <v-toolbar-title>My Class</v-toolbar-title>
+        <v-toolbar-title>All Students</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -36,7 +36,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Item
+              Add Student
             </v-btn>
           </template>
           <v-card>
@@ -47,7 +47,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col
+                  <!-- <v-col
                     cols="12"
                     sm="6"
                     md="4"
@@ -56,15 +56,15 @@
                       v-model="editedItem.name"
                       label="Student name"
                     ></v-text-field>
-                  </v-col>
+                  </v-col> -->
                   <v-col
                     cols="12"
                     sm="6"
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.moyenne"
-                      label="moyenne"
+                      v-model="editedItem.image"
+                      label="image url"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -73,8 +73,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.maths"
-                      label="maths"
+                      v-model="editedItem.name"
+                      label="full name"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -83,8 +83,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.sciences"
-                      label="sciences"
+                      v-model="editedItem.class"
+                      label="class"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -93,8 +93,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.physics"
-                      label="physics"
+                      v-model="editedItem.description"
+                      label="description"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -162,7 +162,7 @@
 <script>
   import axios from "axios";
   export default {
-    name: 'TeacherGrades',
+    name: 'StudentsTable',
     data: () => ({
       search: '',
       dialog: false,
@@ -175,28 +175,26 @@
           sortable: false,
           value: 'name',
         },
-        { text: 'Moyenne', value: 'moyenne' },
-        { text: 'Maths', value: 'maths' },
-        { text: 'Sciences', value: 'sciences' },
-        { text: 'Physics', value: 'physics' },
+        // { text: 'Image URL', value: 'image' },
+        // { text: 'Full Name', value: 'name' },
+        { text: 'Class', value: 'class' },
+        { text: 'Description', value: 'description' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       items: [],
       students: [],
       editedIndex: -1,
       editedItem: {
+        image: '',
         name: '',
-        moyenne: 0,
-        maths: 0,
-        sciences: 0,
-        physics: 0,
+        class: '',
+        description: ''
       },
       defaultItem: {
+        image: '',
         name: '',
-        moyenne: 0,
-        maths: 0,
-        sciences: 0,
-        physics: 0,
+        class: '',
+        description: ''
       },
     }),
 
@@ -238,7 +236,7 @@
 
       async deleteItemConfirm () {
         console.log(this.editedItem)
-        var deleted = await axios.delete(`http://localhost:3000/api/grades/delete/${this.editedItem._id}`)
+        var deleted = await axios.delete(`http://localhost:3000/api/classstudents/delete/${this.editedItem._id}`)
         if(deleted.data.status) {
           this.$vs.notification({
               text:"Deleted successfully",
@@ -281,7 +279,7 @@
               this.editedItem[key]=Number(this.editedItem[key])
             }
           }
-          var updated = await axios.post('http://localhost:3000/api/grades/update', this.editedItem)
+          var updated = await axios.post('http://localhost:3000/api/classstudents/update', this.editedItem)
           if(updated.data.status) {
             this.$vs.notification({
               text:"Updated successfully",
@@ -299,7 +297,7 @@
             })
           }
         } else {
-          var created = await axios.post('http://localhost:3000/api/grades/create',this.editedItem)
+          var created = await axios.post('http://localhost:3000/api/classstudents/create',this.editedItem)
           console.log (created.data)
           if(created.data.status) {
             this.$vs.notification({
@@ -325,12 +323,9 @@
     },
 
     async mounted () {
-      var grade = await axios.get('http://localhost:3000/api/grades')
-        // for (var i = 0; i < grade.data.length; i++){
-        //   this.items.push(grade.data[i])
-        // }
-        this.students = grade.data
-        console.log (grade.data);
+      var studentsList = await axios.get('http://localhost:3000/api/classstudents')
+        this.students = studentsList.data
+        console.log (studentsList.data);
         this.fetched = true;
     }
 
