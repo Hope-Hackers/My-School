@@ -4,6 +4,7 @@ const app = express();
 const send = require("../../server.js");
 app.use(express.json());
 const Messages = require("../../models/messages");
+
 router.post("/postMessage", async (req, res) => {
   senderId = req.body.uuid;
   receiverId = req.body.receiverId;

@@ -34,7 +34,6 @@
         <b-tab title="Grades">
           <TeacherGrades />
         </b-tab>
-        <b-tab title="Info">I'm the last tab</b-tab>
       </b-tabs>
     </b-card>
 
