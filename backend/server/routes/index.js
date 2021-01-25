@@ -3,5 +3,6 @@ module.exports = {
   userRoutes: require("./usersRoutes"),
   scheduleRoutes: require("./scheduleRoutes"),
   gradesRoutes: require("./gradesRoutes"),
-  classScheduleRoutes: require("./classScheduleRoutes")
+  classScheduleRoutes: require("./classScheduleRoutes"),
+  classStudentsRoutes: require("./classStudentsRoutes"),
 };

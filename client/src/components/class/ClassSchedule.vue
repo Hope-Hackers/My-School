@@ -21,7 +21,7 @@
             }
         },
         async mounted() {
-                var schedule = await axios.get('http://localhost:3000/api/classschedule')
+                var schedule = await axios.get('http://localhost:3000/api/classschedule/findwithoutid')
                     this.items = schedule.data
                     console.log(schedule.data)
                     this.fetched=true                   

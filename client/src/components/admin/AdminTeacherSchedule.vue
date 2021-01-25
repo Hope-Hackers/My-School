@@ -1,30 +1,30 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="students"
+    :items="row"
     :search="search"
-    sort-by="moyenne"
+    sort-by="time"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar
         flat
       >
-        <v-toolbar-title>My Class</v-toolbar-title>
+        <v-toolbar-title>Teacher Schedule</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-        <v-text-field
+        <!-- <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"          
           single-line
           hide-details
         ></v-text-field>
-        <v-spacer></v-spacer>
+        <v-spacer></v-spacer> -->
         <v-dialog
           v-model="dialog"
           max-width="500px"
@@ -36,7 +36,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Item
+              Add Row
             </v-btn>
           </template>
           <v-card>
@@ -53,8 +53,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.name"
-                      label="Student name"
+                      v-model="editedItem.time"
+                      label="Time"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -63,8 +63,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.moyenne"
-                      label="moyenne"
+                      v-model="editedItem.monday"
+                      label="Monday"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -73,8 +73,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.maths"
-                      label="maths"
+                      v-model="editedItem.tuesday"
+                      label="Tuesday"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -83,8 +83,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.sciences"
-                      label="sciences"
+                      v-model="editedItem.wednesday"
+                      label="Wednesday"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -93,8 +93,28 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.physics"
-                      label="physics"
+                      v-model="editedItem.thursday"
+                      label="Thursday"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.friday"
+                      label="Friday"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.saturday"
+                      label="Saturday"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -162,41 +182,42 @@
 <script>
   import axios from "axios";
   export default {
-    name: 'TeacherGrades',
+    name: 'AdminTeacherSchedule',
     data: () => ({
       search: '',
       dialog: false,
       dialogDelete: false,
       fetched:false,
       headers: [
-        {
-          text: 'Students',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Moyenne', value: 'moyenne' },
-        { text: 'Maths', value: 'maths' },
-        { text: 'Sciences', value: 'sciences' },
-        { text: 'Physics', value: 'physics' },
+        {text: 'Time', value: 'time', align: 'start', sortable: false},
+        { text: 'Monday', value: 'monday' },
+        { text: 'Tuesaday', value: 'tuesday' },
+        { text: 'Wednesday', value: 'wednesday' },
+        { text: 'Thursday', value: 'thursday' },
+        { text: 'Friday', value: 'friday' },
+        { text: 'Saturday', value: 'saturday' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       items: [],
-      students: [],
+      row: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        moyenne: 0,
-        maths: 0,
-        sciences: 0,
-        physics: 0,
+        time: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
       },
       defaultItem: {
-        name: '',
-        moyenne: 0,
-        maths: 0,
-        sciences: 0,
-        physics: 0,
+        time: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
       },
     }),
 
@@ -221,24 +242,24 @@
 
     methods: {
       initialize () {
-        this.students = this.items
+        this.row = this.items
       },
 
       editItem (item) {
-        this.editedIndex = this.students.indexOf(item)
+        this.editedIndex = this.row.indexOf(item)
         this.editedItem = item
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.students.indexOf(item)
+        this.editedIndex = this.row.indexOf(item)
         this.editedItem = item
         this.dialogDelete = true
       },
 
       async deleteItemConfirm () {
         console.log(this.editedItem)
-        var deleted = await axios.delete(`http://localhost:3000/api/grades/delete/${this.editedItem._id}`)
+        var deleted = await axios.delete(`http://localhost:3000/api/schedule/delete/${this.editedItem._id}`)
         if(deleted.data.status) {
           this.$vs.notification({
               text:"Deleted successfully",
@@ -246,7 +267,7 @@
               position:"top-right",
               color:"success"
           })
-          this.students.splice(this.editedIndex, 1)
+          this.row.splice(this.editedIndex, 1)
         }else{
           this.$vs.notification({
               text:"Try again later",
@@ -281,7 +302,7 @@
               this.editedItem[key]=Number(this.editedItem[key])
             }
           }
-          var updated = await axios.post('http://localhost:3000/api/grades/update', this.editedItem)
+          var updated = await axios.post('http://localhost:3000/api/schedule/update', this.editedItem)
           if(updated.data.status) {
             this.$vs.notification({
               text:"Updated successfully",
@@ -289,7 +310,7 @@
               position:"top-right",
               color:"success"
             })
-            this.students[this.editedIndex] = this.editedItem
+            this.row[this.editedIndex] = this.editedItem
           } else {
             this.$vs.notification({
               text:"Try again later",
@@ -299,17 +320,17 @@
             })
           }
         } else {
-          var created = await axios.post('http://localhost:3000/api/grades/create',this.editedItem)
+          var created = await axios.post('http://localhost:3000/api/schedule/create',this.editedItem)
           console.log (created.data)
-          if(created.data.status) {
+          if(created.data.time) {
             this.$vs.notification({
               text:"Added successfully",
               title:"Notification",
               position:"top-right",
               color:"success"
             })
-            this.editedItem = created.data.newGrade
-            this.students.push(this.editedItem)
+            this.editedItem = created.data
+            this.row.push(this.editedItem)
           } else {
             this.$vs.notification({
               text:"Try again later",
@@ -325,12 +346,9 @@
     },
 
     async mounted () {
-      var grade = await axios.get('http://localhost:3000/api/grades')
-        // for (var i = 0; i < grade.data.length; i++){
-        //   this.items.push(grade.data[i])
-        // }
-        this.students = grade.data
-        console.log (grade.data);
+      var schedule = await axios.get('http://localhost:3000/api/schedule')
+        this.row = schedule.data
+        console.log (schedule.data);
         this.fetched = true;
     }
 

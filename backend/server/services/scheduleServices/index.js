@@ -5,10 +5,15 @@ module.exports = {
         return Schedules.find({},{_id:0}).sort({"Time":1});
     },
   async findAllSchedules() {
-    return Schedules.find({})
+    return Schedules.find({}).sort({"Time":1})
   },
     async createSchedule(schedule) {
-      console.log(schedule)
     return Schedules.create(schedule);
   },
+  async deleteSchedule(schedule) {
+    return Schedules.deleteOne(schedule);
+  },
+  async updateSchedule(schedule) {
+    return Schedules.findOneAndUpdate({ _id: schedule._id }, schedule, {useFindAndModify: false})
+  }
 };

@@ -15,6 +15,6 @@ module.exports = {
         return Grades.deleteOne(grade);
     },
     async updateGrade(grade) {
-        return Grades.findOneAndUpdate({ _id: grade._id },grade)
+        return Grades.findOneAndUpdate({ _id: grade._id }, grade, {useFindAndModify: false})
     }
 };
