@@ -120,7 +120,7 @@ export default {
   },
   async mounted() {
     var studentsList = await axios.get(
-      "http://localhost:7000/api/routes/classstudents"
+      "http://localhost:7000/api/classstudents"
     );
     this.students = studentsList.data.splice(0, 1);
     console.log(studentsList.data);

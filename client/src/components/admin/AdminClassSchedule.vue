@@ -1,5 +1,5 @@
 <template>
-  <div div data-app>
+  <div data-app>
     <v-data-table
       :headers="headers"
       :items="row"
