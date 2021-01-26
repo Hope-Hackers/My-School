@@ -12,6 +12,11 @@ export default new Router({
       index: 0,
       children: [
         {
+          path: "",
+          component: () => import("./components/Landing.vue"),
+          index: 0,
+        },
+        {
           path: "Login",
           component: () => import("./components/Login.vue"),
           index: 0,
@@ -55,6 +60,16 @@ export default new Router({
           path: "/ContactAdmin",
           component: () => import("./components/admin/ContactAdmin.vue"),
           index: 8,
+        },
+        {
+          path: "UpdateTemplate",
+          component: () => import("./components/UpdateTemplate.vue"),
+          index: 9,
+        },
+        {
+          path: "NewsTemplate",
+          component: () => import("./components/NewsTemplate.vue"),
+          index: 10,
         },
       ],
     },

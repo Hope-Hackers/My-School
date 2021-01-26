@@ -1,26 +1,19 @@
 <template>
   <div id="app">
-    <TheTopBar />
     <TheSideBar />
-    <!-- <ContactAdmin /> -->
     <router-view></router-view>
   </div>
 </template>
-//
-<script>
-import TheTopBar from "./components/TheTopBar.vue";
-import TheSideBar from "./components/TheSideBar.vue";
-// import ContactAdmin from "./components/admin/ContactAdmin.vue";
 
+<script>
+import TheSideBar from "./components/TheSideBar.vue";
 export default {
   name: "App",
   data: () => {
     return {};
   },
   components: {
-    TheTopBar,
     TheSideBar,
-    // ContactAdmin,
   },
 };
 </script>

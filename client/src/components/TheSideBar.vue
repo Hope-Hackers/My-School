@@ -1,6 +1,6 @@
 <template>
-  <div v-if="this.name" class="hidden">
-    <vs-sidebar absolute hover-expand reduce v-model="active" open>
+  <div v-if="this.name" class="hidden" id="sidebar">
+    <vs-sidebar id="sidd" absolute reduce hover-expand v-model="active" open>
       <template #logo>
         <vs-avatar>
           <img
@@ -10,24 +10,30 @@
         </vs-avatar>
       </template>
       <h2>{{ this.name }}</h2>
-      <vs-sidebar-item id="home">
-        <template #icon>
-          <i class="bx bx-home" @click="redirectHome"></i>
-        </template>
-        Home
-      </vs-sidebar-item>
-      <vs-sidebar-item id="Profile">
-        <template #icon>
-          <i class="bx bxs-user-rectangle" @click="redirectProfil"></i>
-        </template>
-        Teachers
-      </vs-sidebar-item>
-      <vs-sidebar-item id="chat">
-        <template #icon>
-          <i class="bx bx-chat" @click="redirectChatContainer"></i>
-        </template>
-        Chat
-      </vs-sidebar-item>
+      <span @click="redirectHome">
+        <vs-sidebar-item id="home">
+          <template #icon>
+            <i class="bx bx-home"></i>
+          </template>
+          Home
+        </vs-sidebar-item>
+      </span>
+      <span @click="redirectProfil">
+        <vs-sidebar-item id="Profile">
+          <template #icon>
+            <i class="bx bxs-user-rectangle"></i>
+          </template>
+          Teachers
+        </vs-sidebar-item>
+      </span>
+      <span @click="redirectChatContainer">
+        <vs-sidebar-item id="chat">
+          <template #icon>
+            <i class="bx bx-chat"></i>
+          </template>
+          Chat
+        </vs-sidebar-item>
+      </span>
       <vs-sidebar-group>
         <template #header>
           <vs-sidebar-item arrow>
@@ -70,12 +76,14 @@
         </template>
         Event
       </vs-sidebar-item>
-      <vs-sidebar-item id="Contact Us">
-        <template #icon>
-          <i class="bx bx-support" @click="redirectContactUs"></i>
-        </template>
-        Contact Us
-      </vs-sidebar-item>
+      <span @click="redirectContactUs">
+        <vs-sidebar-item id="Contact Us">
+          <template #icon>
+            <i class="bx bx-support"></i>
+          </template>
+          Contact Us
+        </vs-sidebar-item>
+      </span>
       <template #footer>
         <vs-row justify="space-between">
           <vs-avatar badge-color="danger" badge-position="top-right">

@@ -154,6 +154,8 @@
 <script>
 import axios from "axios";
 import { mdiAccount, mdiAccountOutline, mdiHome } from "@mdi/js";
+//sets a cookie for the login for storage
+const cookie = require("js-cookie");
 export default {
   computed: {
     passwordMatch() {
@@ -176,6 +178,7 @@ export default {
             password: this.loginPassword,
           })
           .then((response) => {
+            cookie.set("name", response.data.username);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("messangerId", response.data.messangerId);
             localStorage.setItem("Username", response.data.username);

@@ -24,7 +24,11 @@
 
                   <v-list-item-subtitle>English teacher</v-list-item-subtitle>
                   <div class="btn">
-                    <v-btn depressed color="primary" @click="redirectMessages(123)">
+                    <v-btn
+                      depressed
+                      color="primary"
+                      @click="redirectMessages(123)"
+                    >
                       Message
                     </v-btn>
                   </div>
@@ -64,7 +68,11 @@
 
                 <v-list-item-subtitle>physics teacher </v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages(133)">
+                  <v-btn
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(133)"
+                  >
                     Message
                   </v-btn>
                 </div>
@@ -100,7 +108,11 @@
 
                 <v-list-item-subtitle>Arabic teacher</v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages(143)">
+                  <v-btn
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(143)"
+                  >
                     Message
                   </v-btn>
                 </div>
