@@ -34,7 +34,8 @@ router.post("/update", async (req, res) => {
   try {
     var newGrade = await services.findOneAndUpdate(
       { _id: req.body._id },
-      req.body
+      req.body,
+      { useFindAndModify: false }
     );
     res.send({ newGrade, status: true });
   } catch (err) {

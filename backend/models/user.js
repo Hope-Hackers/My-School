@@ -24,6 +24,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
   },
-});
+  role: String
+},{ timestamps: true });
 
 module.exports = mongoose.model("users", userSchema);

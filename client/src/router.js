@@ -12,6 +12,11 @@ export default new Router({
       index: 0,
       children: [
         {
+          path: "",
+          component: () => import("./components/Landing.vue"),
+          index: 0,
+        },
+        {
           path: "Login",
           component: () => import("./components/Login.vue"),
           index: 0,
@@ -44,7 +49,27 @@ export default new Router({
         {
           path: "/ChatStructure",
           component: () => import("./components/profil/ChatStructure.vue"),
-          index: 5,
+          index: 6,
+        },
+        {
+          path: "/admin",
+          component: () => import("./components/admin/Admin.vue"),
+          index: 7,
+        },
+        {
+          path: "/ContactAdmin",
+          component: () => import("./components/admin/ContactAdmin.vue"),
+          index: 8,
+        },
+        {
+          path: "Updates",
+          component: () => import("./components/UpdateTemplate.vue"),
+          index: 9,
+        },
+        {
+          path: "News",
+          component: () => import("./components/NewsTemplate.vue"),
+          index: 10,
         },
       ],
     },

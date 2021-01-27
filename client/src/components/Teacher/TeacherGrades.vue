@@ -191,7 +191,7 @@ export default {
         `http://localhost:7000/api/grades/delete/${this.editedItem._id}`
       );
       if (deleted.data.status) {
-        this.$vs.notify({
+        this.$vs.notification({
           text: "Deleted successfully",
           title: "Notification",
           position: "top-right",
@@ -199,7 +199,7 @@ export default {
         });
         this.students.splice(this.editedIndex, 1);
       } else {
-        this.$vs.notify({
+        this.$vs.notification({
           text: "Try again later",
           title: "Notification",
           position: "top-right",
@@ -237,7 +237,7 @@ export default {
           this.editedItem
         );
         if (updated.data.status) {
-          this.$vs.notify({
+          this.$vs.notification({
             text: "Updated successfully",
             title: "Notification",
             position: "top-right",
@@ -245,7 +245,7 @@ export default {
           });
           this.students[this.editedIndex] = this.editedItem;
         } else {
-          this.$vs.notify({
+          this.$vs.notification({
             text: "Try again later",
             title: "Notification",
             position: "top-right",
@@ -259,7 +259,7 @@ export default {
         );
         console.log(created.data);
         if (created.data.status) {
-          this.$vs.notify({
+          this.$vs.notification({
             text: "Added successfully",
             title: "Notification",
             position: "top-right",
@@ -268,7 +268,7 @@ export default {
           this.editedItem = created.data.newGrade;
           this.students.push(this.editedItem);
         } else {
-          this.$vs.notify({
+          this.$vs.notification({
             text: "Try again later",
             title: "Notification",
             position: "top-right",

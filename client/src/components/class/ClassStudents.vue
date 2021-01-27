@@ -6,8 +6,8 @@
       <v-card
         class="mx-auto ma-2 pa-2"
         max-width="344"
-        v-for="student in students"
-        :key="student.id"
+        v-for="(student, index) in dynamicList"
+        :key="index"
       >
         <v-img :src="student.image" height="200px"></v-img>
 
@@ -16,7 +16,9 @@
         </v-card-title>
 
         <v-card-subtitle>
-          <h6>{{ student.class }}</h6>
+          <h6><b>Class : </b> {{ student.class }}</h6>
+          <v-spacer></v-spacer>
+          <h6><b>Student Id : </b>{{ student.studentId }}</h6>
         </v-card-subtitle>
 
         <v-card-actions>
@@ -26,15 +28,16 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn icon @click="onClick(student.id)">
-            <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+          <v-btn icon @click="student.visible = !student.visible">
+            <v-icon>{{
+              student.visible ? "mdi-chevron-up" : "mdi-chevron-down"
+            }}</v-icon>
           </v-btn>
         </v-card-actions>
 
         <v-expand-transition>
-          <div v-show="show">
+          <div v-show="student.visible">
             <v-divider></v-divider>
-
             <v-card-text>
               {{ student.description }}
             </v-card-text>
@@ -46,53 +49,33 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "ClassStudents",
   data: () => ({
     show: false,
-    students: [
-      {
-        image:
-          "https://previews.123rf.com/images/wavebreakmediamicro/wavebreakmediamicro1508/wavebreakmediamicro150801332/43914869-portrait-d-%C3%A9l%C3%A8ve-souriant-calculant-sur-le-tableau-dans-une-classe-%C3%A0-l-%C3%A9cole.jpg",
-        name: "Khaled Yeferni",
-        class: "Cohort 8",
-        description: "Here is my description",
-        id: 1,
-      },
-      {
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREt0Mp72T9jEFJtj3AskzK1eBY437C8Y6lTw&usqp=CAU",
-        name: "Zied Sradki",
-        class: "Cohort 8",
-        description: "Here is my description",
-        id: 2,
-      },
-      {
-        image:
-          "https://image.freepik.com/photos-gratuite/closeup-portrait-eleve-souriant-garcon-mignon-rentree-scolaire-enfant-sac-dos-premier-jour-ecole_90791-694.jpg",
-        name: "Melek Houidi",
-        class: "Cohort 8",
-        description: "Here is my description",
-        id: 3,
-      },
-      {
-        image:
-          "https://i0.wp.com/taniere-de-kyban.fr/wp-content/uploads/2017/07/opposition_FB.jpg?fit=1200%2C630&ssl=1",
-        name: "Wael Jouini",
-        class: "Cohort 8",
-        description: "Here is my description",
-        id: 4,
-      },
-    ],
+    dynamicList: [],
+    students: [],
   }),
   methods: {
-    onClick(id) {
-      this.students.map((student) => {
-        if (id === student.id) {
-          this.show = !this.show;
-        }
+    prepareDynamicList() {
+      this.students.forEach((element) => {
+        this.dynamicList.push({ ...element, visible: false });
       });
     },
+  },
+  //the data would be available when the component is created, so the created hook is where we will prepare our list for toggling.
+  // async created(){
+  //     await this.prepareDynamicList();
+  // },
+  async mounted() {
+    var studentsList = await axios.get(
+      "http://localhost:7000/api/classstudents"
+    );
+    this.students = studentsList.data;
+    console.log(studentsList.data);
+    this.prepareDynamicList();
+    this.fetched = true;
   },
 };
 </script>

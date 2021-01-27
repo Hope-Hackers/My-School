@@ -24,7 +24,13 @@
 
                   <v-list-item-subtitle>English teacher</v-list-item-subtitle>
                   <div class="btn">
-                    <v-btn depressed color="primary" @click="redirectMessages">
+                    <v-btn
+                      v-for="type in types"
+                      :key="type"
+                      depressed
+                      color="primary"
+                      @click="redirectMessages(123), handleClickLoading(type)"
+                    >
                       Message
                     </v-btn>
                   </div>
@@ -64,7 +70,13 @@
 
                 <v-list-item-subtitle>physics teacher </v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn
+                    v-for="type in types"
+                    :key="type"
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(133), handleClickLoading(type)"
+                  >
                     Message
                   </v-btn>
                 </div>
@@ -100,7 +112,13 @@
 
                 <v-list-item-subtitle>Arabic teacher</v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn
+                    v-for="type in types"
+                    :key="type"
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(143), handleClickLoading(type)"
+                  >
                     Message
                   </v-btn>
                 </div>
@@ -138,7 +156,13 @@
 
                 <v-list-item-subtitle>Sports teacher</v-list-item-subtitle>
                 <div class="btn">
-                  <v-btn depressed color="primary" @click="redirectMessages">
+                  <v-btn
+                    v-for="type in types"
+                    :key="type"
+                    depressed
+                    color="primary"
+                    @click="redirectMessages(153), handleClickLoading(type)"
+                  >
                     Message
                   </v-btn>
                 </div>
@@ -159,18 +183,42 @@
 <script>
 export default {
   name: "Profil",
+  data() {
+    return {
+      hasOpenLoading: false,
+      types: ["square"],
+    };
+  },
   methods: {
-    redirectMessages() {
-      this.$store.commit("setroom", 123);
+    redirectMessages(x) {
+      this.$store.commit("setroom", x);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
     redirectDetails() {
-      this.$store.commit("setroom", 123);
       this.$router.push({ path: "/Teacher", addToHistory: false });
     },
-  },
-  data() {
-    return {};
+    handleClickLoading(type) {
+      const loading = this.$vs.loading({
+        type,
+      });
+      this.hasOpenLoading = true;
+      setTimeout(() => {
+        loading.close();
+        this.hasOpenLoading = false;
+      }, 3000);
+    },
+    openLoading(type, ref) {
+      this.$vs.loading({
+        target: this.$refs[ref][0],
+        text: type,
+        type,
+      });
+    },
+    mounted() {
+      this.types.forEach((type, i) => {
+        this.openLoading(type, `box${i}`);
+      });
+    },
   },
 };
 </script>

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const classScheduleSchema = new Schema({
+  class: {
+    type: String
+  },
   time: {
     type: Number,
   },

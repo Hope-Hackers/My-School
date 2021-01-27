@@ -1,43 +1,45 @@
 <template>
-  <div id="contact-form" class="contact-form">
-    <h1 class="contact-form_title">Contact Form</h1>
-    <div class="separator"></div>
+  <div class="CTSUP">
+    <div id="contact-form" class="contact-form">
+      <h1 class="contact-form_title">Contact Form</h1>
+      <div class="separator"></div>
 
-    <div v-if="isSending" class="loading">Sendig...</div>
+      <div v-if="isSending" class="loading">Sendig...</div>
 
-    <form class="form" @submit="onSubmit">
-      <input
-        required
-        name="First name"
-        v-model="contact.name"
-        placeholder="First Name"
-        type="text"
-        autocomplete="off"
-      />
-      <input
-        required
-        name="Last name"
-        v-model="contact.Lname"
-        placeholder="Last name"
-        type="text"
-        autocomplete="off"
-      />
-      <input
-        required
-        name="email"
-        v-model="contact.email"
-        placeholder="E-mail"
-        type="email"
-        autocomplete="off"
-      />
-      <textarea
-        name="message"
-        v-model="contact.message"
-        rows="4"
-        placeholder="Message"
-      ></textarea>
-      <button class="button">Send</button>
-    </form>
+      <form class="form" @submit="onSubmit">
+        <input
+          required
+          name="First name"
+          v-model="contact.name"
+          placeholder="First Name"
+          type="text"
+          autocomplete="off"
+        />
+        <input
+          required
+          name="Last name"
+          v-model="contact.Lname"
+          placeholder="Last name"
+          type="text"
+          autocomplete="off"
+        />
+        <input
+          required
+          name="email"
+          v-model="contact.email"
+          placeholder="E-mail"
+          type="email"
+          autocomplete="off"
+        />
+        <textarea
+          name="message"
+          v-model="contact.message"
+          rows="4"
+          placeholder="Message"
+        ></textarea>
+        <button class="button">Send</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -159,4 +161,11 @@ div#contact-form {
   font-size: 15px;
   border-radius: 3px;
 }
+/* .CTSUP {
+  min-width: 100%;
+  min-height: 100vh;
+  background: url("../assets/sup.jpg") center center;
+  background-size: cover;
+  padding-top: 30px;
+} */
 </style>
