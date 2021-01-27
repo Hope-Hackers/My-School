@@ -11,6 +11,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/withoutid", async (req, res) => {
+  try {
+    var Schedules = await services.scheduleServices.findAllSchedulesWithoutId();
+    res.send(Schedules);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 router.post('/create',async (req,res) => {
   try {
     req.body.time = Number(req.body.time)

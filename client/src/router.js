@@ -9,7 +9,7 @@ export default new Router({
         {
             path:"/",
             component: () => import("./components/Home.vue"),
-            index:0
+            index: 0,
         },
         {
             path: "/login",
@@ -30,6 +30,11 @@ export default new Router({
             path: "/admin",
             component: () => import("./components/admin/Admin.vue"),
             index: 4,
+        },
+        {
+            path: "/parent",
+            component: () => import("./components/Teacher/StudentGrades.vue"),
+            index: 5,
         }
     ]
 });

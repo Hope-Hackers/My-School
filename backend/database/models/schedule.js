@@ -23,6 +23,8 @@ const scheduleSchema = new Schema({
   saturday: {
       type: String,
   }
+},{
+    versionKey: false // set to false then it wont create in mongodb
 });
 
 module.exports = mongoose.model("schedule", scheduleSchema);

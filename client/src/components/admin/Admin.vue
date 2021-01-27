@@ -32,6 +32,11 @@
                    <AdminTeacherSchedule/>
                 </v-container>
             </v-tab-item>
+            <v-tab-item>
+                <v-container fluid>
+                   <AdminUsers/>
+                </v-container>
+            </v-tab-item>
             </v-tabs>
         </v-card>         
     </div>
@@ -43,6 +48,7 @@
     import TeachersList from "./TeachersList"
     import AdminTeacherSchedule from "./AdminTeacherSchedule"
     import AdminClassSchedule from "./AdminClassSchedule"
+    import AdminUsers from "./AdminUsers"
     export default {
         name: "Admin",
         components: {
@@ -50,7 +56,8 @@
             ClassesList,
             TeachersList,
             AdminTeacherSchedule,
-            AdminClassSchedule
+            AdminClassSchedule,
+            AdminUsers
         },
         data: () => ({
             tabs: [
@@ -58,13 +65,9 @@
                 "Classes Grades",
                 "Parent vew",
                 "Class Schedule",
-                "Teacher Schedule"
+                "Teacher Schedule",
+                "Users Manager"
             ],
-            components: [
-                StudentsList,
-                ClassesList,
-                TeachersList
-            ]
         })
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h5>My Class Schedule :</h5>
+        <h5>{{parent.class}} Schedule :</h5>
         <br/>
         <div>
             <b-table hover :items="items"></b-table>
@@ -12,23 +12,17 @@
     import axios from "axios";
     export default {
         name: 'ClassSchedule',
-        components: {
-        },
         data() {
         return {
             fetched:false,
             items: []
             }
         },
-        async mounted() {
-                var schedule = await axios.get('http://localhost:3000/api/classschedule/findwithoutid')
-                    this.items = schedule.data
-                    console.log(schedule.data)
-                    this.fetched=true                   
-            }, 
-        methods: {
-           
+        async beforeMount(){
+            var schedules = await axios.post('http://localhost:3000/api/classSchedule/filter',{class:parent.class})
+            this.items=schedules.data.classSchedule
         }
+      
     }
 </script>
 
