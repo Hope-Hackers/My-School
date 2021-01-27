@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const classStudentsSchema = new Schema({
+  studentId: {
+    type: Number,
+    unique: true
+  },
   image: {
     type: String,
   },
@@ -13,7 +17,11 @@ const classStudentsSchema = new Schema({
   },
   description: {
     type: String,
-  }
+  },
+  // parent: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user'
+  // }
 },{
     versionKey: false // set to false then it wont create in mongodb
 });

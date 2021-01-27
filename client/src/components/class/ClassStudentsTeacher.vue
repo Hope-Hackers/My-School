@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <h5>My Class Students :</h5>
+        <h5 v-if="students && students.length">{{selected}} Students :</h5>
         <br/>  
         <v-row>
             
             <v-card
                 class="mx-auto ma-2 pa-2"
                 max-width="344"
-                v-for="(student, index) in dynamicList" :key="index" 
+                v-for="(student, index) in students" :key="index" 
             >
                 <v-img
                 :src="student.image"
@@ -19,9 +19,7 @@
                 </v-card-title>
 
                 <v-card-subtitle>
-                    <h6><b>Class : </b> {{student.class}}</h6>
-                    <v-spacer></v-spacer>
-                    <h6><b>Student Id : </b>{{student.studentId}}</h6>
+                    <h6>{{selected}}</h6>
                 </v-card-subtitle>
 
                 <v-card-actions>
@@ -56,15 +54,16 @@
 </template>
 
 <script>
-    import axios from "axios";
+    // import axios from "axios";
     export default {
         name: 'ClassStudents',
         data: () => ({
-            show: false,
             dynamicList: [],
-            students: []
         }),
-
+        props:{
+            selected:String,
+            students:Array
+        },
         methods: {
             prepareDynamicList(){
                 this.students.forEach(element => {
@@ -76,13 +75,13 @@
         // async created(){
         //     await this.prepareDynamicList();
         // },
-        async mounted () {
-            var studentsList = await axios.get('http://localhost:3000/api/classstudents')
-            this.students = studentsList.data
-            console.log (studentsList.data);
-            this.prepareDynamicList();
-            this.fetched = true;
-        }
+        // async mounted () {
+        //     var studentsList = await axios.get('http://localhost:3000/api/classstudents')
+        //     this.students = studentsList.data
+        //     console.log (studentsList.data);
+        //     this.prepareDynamicList();
+        //     this.fetched = true;
+        // }
     }
 </script>
 

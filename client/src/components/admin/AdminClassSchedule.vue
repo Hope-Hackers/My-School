@@ -10,7 +10,21 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Class Schedule</v-toolbar-title>
+        <!-- <v-toolbar-title>Class Schedule</v-toolbar-title> -->
+        <v-col
+          class="d-flex mt-6"
+          cols="12"
+          sm="6"
+        >
+          <v-select
+            :items="fields"
+            v-model="selected"
+            @change="fetchData"
+            label="Select a class"
+            dense
+            solo
+          ></v-select>
+        </v-col>
         <v-divider
           class="mx-4"
           inset
@@ -47,6 +61,17 @@
             <v-card-text>
               <v-container>
                 <v-row>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="selected"
+                      label="class"
+                      disabled
+                    ></v-text-field>
+                  </v-col>
                   <v-col
                     cols="12"
                     sm="6"
@@ -184,6 +209,7 @@
   export default {
     name: 'AdminClassSchedule',
     data: () => ({
+      selected: null,
       search: '',
       dialog: false,
       dialogDelete: false,
@@ -203,10 +229,12 @@
         { text: 'Saturday', value: 'saturday' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      fields: ['1st A', '5th B', '6th B', '3rd A'],
       items: [],
       row: [],
       editedIndex: -1,
       editedItem: {
+        class: '',
         time: '',
         monday: '',
         tuesday: '',
@@ -216,6 +244,7 @@
         saturday: '',
       },
       defaultItem: {
+        class: '',
         time: '',
         monday: '',
         tuesday: '',
@@ -325,6 +354,7 @@
             })
           }
         } else {
+          this.editedItem.class=this.selected
           var created = await axios.post('http://localhost:3000/api/classschedule/create',this.editedItem)
           console.log (created.data)
           if(created.data.time) {
@@ -334,7 +364,8 @@
               position:"top-right",
               color:"success"
             })
-            this.editedItem = created.data.newGrade
+            this.editedItem = created.data
+            console.log(this.editedItem)
             this.row.push(this.editedItem)
           } else {
             this.$vs.notification({
@@ -348,14 +379,18 @@
         }
         this.close()
       },
+      async fetchData(){
+                var schedules = await axios.post('http://localhost:3000/api/classSchedule/filterid',{class:this.selected})
+                this.row = schedules.data.classSchedule
+            }
     },
 
-    async mounted () {
-      var schedule = await axios.get('http://localhost:3000/api/classschedule')
-        this.row = schedule.data
-        console.log (schedule.data);
-        this.fetched = true;
-    }
+    // async mounted () {
+    //   var schedule = await axios.get('http://localhost:3000/api/classschedule')
+    //     this.row = schedule.data
+    //     console.log (schedule.data);
+    //     this.fetched = true;
+    // }
 
   }
 </script>

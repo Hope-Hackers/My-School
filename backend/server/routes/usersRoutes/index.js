@@ -33,13 +33,13 @@ router.post("/createUser", [
   check("password", "Please enter a password").isLength({ min: 8 }),
   check("childId", "Please enter a childId").isLength({ min: 6 }),
 ],
-async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { firstName, lastName, email, password, childId } = req.body;
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.send({ msg: errors.array() });
+    }
+    
+  const { firstName, lastName, email, password, childId, role } = req.body;
 
   try {
     let user = await User.findOne({ email }).exec();
@@ -48,8 +48,7 @@ async (req, res) => {
 
     if (user) {
       return res
-        .status(400)
-        .json({ errors: [{ msg: "User alredy exists" }] });
+        .send({ msg:"User alredy exists" });
     }
     // Instance User
 
@@ -59,20 +58,21 @@ async (req, res) => {
       email,
       password,
       childId,
+      role,
     });
 
     // Encrypt password
     const salt = await bcrypt.genSalt(10);
 
     user.password = await bcrypt.hash(password, salt);
-
     // JWT Token generation
-    await user.save();
-    const payload = {
-      user: {
-        id: user.id,
-      },
-    };
+    var created = await user.save();
+    // const payload = {
+    //   user: {
+    //     id: user.id,
+    //   },
+    // };
+    res.send(created)
     // jwt.sign(
     //   payload,
     //   config.get("jwtSecret"),
@@ -83,9 +83,28 @@ async (req, res) => {
     //   }
     // );
   } catch (err) {
-    console.log(err.message);
-    res.status(500).send("Server error");
+    res.send({msg:"Server error"});
   }
 });
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        await services.userServices.deleteUser({ _id: req.params.id })
+        res.send({status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
+
+router.post('/update', async (req, res) => {
+    try {
+        var newUser = await services.userServices.updateUser(req.body)
+        res.send({newUser,status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
+
+  
 
 module.exports = router;

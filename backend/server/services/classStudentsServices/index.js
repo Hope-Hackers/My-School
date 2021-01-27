@@ -15,6 +15,9 @@ module.exports = {
         return ClassStudents.deleteOne(classStudent);
     },
     async updateStudent(classStudent) {
-        return ClassStudents.findOneAndUpdate({ _id: classStudent._id },classStudent)
+        return ClassStudents.findOneAndUpdate({ _id: classStudent._id },classStudent,{useFindAndModify: false})
+    },
+    async findClassStudents(filter) {
+        return ClassStudents.find(filter);
     }
 };

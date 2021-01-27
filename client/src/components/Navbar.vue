@@ -26,6 +26,9 @@
             </b-navbar-nav>
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto navLink">
+                <router-link to='/Parent'>Parent Dashboard</router-link>
+                <router-link to='/Teacher/Schedule'>Teacher Dashboard</router-link>
+                <router-link to='/Admin'>Admin</router-link>
                 <router-link to='/Login'>Login</router-link>
                 <router-link to='/Signup'>Sign up</router-link>
             </b-navbar-nav>

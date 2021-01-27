@@ -50,4 +50,22 @@ router.post('/update', async (req, res) => {
     }
 })
 
+router.post('/filter', async (req, res) => {
+    try {
+      var classSchedule = await services.classScheduleServices.findClassSchedule(req.body)
+        res.send({classSchedule,status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
+
+router.post('/filterid', async (req, res) => {
+    try {
+      var classSchedule = await services.classScheduleServices.findClassScheduleId(req.body)
+        res.send({classSchedule,status:true})
+    } catch (err) {
+        res.send({err,status:false})
+    }
+})
+
 module.exports = router;
