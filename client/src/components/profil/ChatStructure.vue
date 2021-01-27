@@ -20,7 +20,12 @@
               :key="item.name"
             >
               <td>{{ item.name }}</td>
-              <v-btn class="redmsg" @click="redirectMsg(item.id)">
+              <v-btn
+                v-for="type in types"
+                v-bind:key="type"
+                class="redmsg"
+                @click="redirectMsg(item.id), handleClickLoading(type)"
+              >
                 Message
               </v-btn>
             </tr>
@@ -38,21 +43,23 @@ export default {
       ChatTeachers: [
         {
           name: "Melek Houidi",
-          id:123
+          id: 123,
         },
         {
           name: "Khaled Yeferni ",
-          id:133
+          id: 133,
         },
         {
           name: "Zied sradki ",
-          id:143
+          id: 143,
         },
         {
           name: "Wael Jouini ",
-          id:153
+          id: 153,
         },
       ],
+      hasOpenLoading: false,
+      types: ["square"],
     };
   },
   methods: {
@@ -60,6 +67,28 @@ export default {
       this.$store.commit("setroom", x);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
+    handleClickLoading(type) {
+      const loading = this.$vs.loading({
+        type,
+      });
+      this.hasOpenLoading = true;
+      setTimeout(() => {
+        loading.close();
+        this.hasOpenLoading = false;
+      }, 3000);
+    },
+    openLoading(type, ref) {
+      this.$vs.loading({
+        target: this.$refs[ref][0],
+        text: type,
+        type,
+      });
+    },
+  },
+  mounted() {
+    this.types.forEach((type, i) => {
+      this.openLoading(type, `box${i}`);
+    });
   },
 };
 </script>

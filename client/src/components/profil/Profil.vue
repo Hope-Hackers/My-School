@@ -25,9 +25,11 @@
                   <v-list-item-subtitle>English teacher</v-list-item-subtitle>
                   <div class="btn">
                     <v-btn
+                      v-for="type in types"
+                      v-bind:key="type"
                       depressed
                       color="primary"
-                      @click="redirectMessages(123)"
+                      @click="redirectMessages(123), handleClickLoading(type)"
                     >
                       Message
                     </v-btn>
@@ -69,9 +71,11 @@
                 <v-list-item-subtitle>physics teacher </v-list-item-subtitle>
                 <div class="btn">
                   <v-btn
+                    v-for="type in types"
+                    v-bind:key="type"
                     depressed
                     color="primary"
-                    @click="redirectMessages(133)"
+                    @click="redirectMessages(133), handleClickLoading(type)"
                   >
                     Message
                   </v-btn>
@@ -109,9 +113,11 @@
                 <v-list-item-subtitle>Arabic teacher</v-list-item-subtitle>
                 <div class="btn">
                   <v-btn
+                    v-for="type in types"
+                    v-bind:key="type"
                     depressed
                     color="primary"
-                    @click="redirectMessages(143)"
+                    @click="redirectMessages(143), handleClickLoading(type)"
                   >
                     Message
                   </v-btn>
@@ -151,9 +157,11 @@
                 <v-list-item-subtitle>Sports teacher</v-list-item-subtitle>
                 <div class="btn">
                   <v-btn
+                    v-for="type in types"
+                    v-bind:key="type"
                     depressed
                     color="primary"
-                    @click="redirectMessages(153)"
+                    @click="redirectMessages(153), handleClickLoading(type)"
                   >
                     Message
                   </v-btn>
@@ -175,6 +183,12 @@
 <script>
 export default {
   name: "Profil",
+  data() {
+    return {
+      hasOpenLoading: false,
+      types: ["square"],
+    };
+  },
   methods: {
     redirectMessages(x) {
       this.$store.commit("setroom", x);
@@ -183,9 +197,28 @@ export default {
     redirectDetails() {
       this.$router.push({ path: "/Teacher", addToHistory: false });
     },
+    handleClickLoading(type) {
+      const loading = this.$vs.loading({
+        type,
+      });
+      this.hasOpenLoading = true;
+      setTimeout(() => {
+        loading.close();
+        this.hasOpenLoading = false;
+      }, 3000);
+    },
+    openLoading(type, ref) {
+      this.$vs.loading({
+        target: this.$refs[ref][0],
+        text: type,
+        type,
+      });
+    },
   },
-  data() {
-    return {};
+  mounted() {
+    this.types.forEach((type, i) => {
+      this.openLoading(type, `box${i}`);
+    });
   },
 };
 </script>
