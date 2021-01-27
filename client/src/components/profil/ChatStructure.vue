@@ -22,7 +22,7 @@
               <td>{{ item.name }}</td>
               <v-btn
                 v-for="type in types"
-                v-bind:key="type"
+                :key="type"
                 class="redmsg"
                 @click="redirectMsg(item.id), handleClickLoading(type)"
               >
@@ -84,11 +84,11 @@ export default {
         type,
       });
     },
-  },
-  mounted() {
-    this.types.forEach((type, i) => {
-      this.openLoading(type, `box${i}`);
-    });
+    mounted() {
+      this.types.forEach((type, i) => {
+        this.openLoading(type, `box${i}`);
+      });
+    },
   },
 };
 </script>

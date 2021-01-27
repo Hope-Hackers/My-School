@@ -26,7 +26,7 @@
                   <div class="btn">
                     <v-btn
                       v-for="type in types"
-                      v-bind:key="type"
+                      :key="type"
                       depressed
                       color="primary"
                       @click="redirectMessages(123), handleClickLoading(type)"
@@ -72,7 +72,7 @@
                 <div class="btn">
                   <v-btn
                     v-for="type in types"
-                    v-bind:key="type"
+                    :key="type"
                     depressed
                     color="primary"
                     @click="redirectMessages(133), handleClickLoading(type)"
@@ -114,7 +114,7 @@
                 <div class="btn">
                   <v-btn
                     v-for="type in types"
-                    v-bind:key="type"
+                    :key="type"
                     depressed
                     color="primary"
                     @click="redirectMessages(143), handleClickLoading(type)"
@@ -158,7 +158,7 @@
                 <div class="btn">
                   <v-btn
                     v-for="type in types"
-                    v-bind:key="type"
+                    :key="type"
                     depressed
                     color="primary"
                     @click="redirectMessages(153), handleClickLoading(type)"
@@ -214,11 +214,11 @@ export default {
         type,
       });
     },
-  },
-  mounted() {
-    this.types.forEach((type, i) => {
-      this.openLoading(type, `box${i}`);
-    });
+    mounted() {
+      this.types.forEach((type, i) => {
+        this.openLoading(type, `box${i}`);
+      });
+    },
   },
 };
 </script>
