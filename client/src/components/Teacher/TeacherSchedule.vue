@@ -1,9 +1,11 @@
 <template>
-  <div class="container">
-    <h3>My Schedule :</h3>
-    <br />
-    <div>
-      <b-table hover :items="items"></b-table>
+  <div data-app>
+    <div class="container">
+      <h3>My Schedule :</h3>
+      <br />
+      <div>
+        <b-table hover :items="items"></b-table>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +22,9 @@ export default {
     };
   },
   async mounted() {
-    var schedule = await axios.get("http://localhost:7000/api/schedule");
+    var schedule = await axios.get(
+      "http://localhost:7000/api/schedule/withoutid"
+    );
     this.items = schedule.data;
     console.log(schedule.data);
     this.fetched = true;

@@ -1,5 +1,5 @@
 <template>
-  <div data-app class="container" id="adminwidth">
+  <div data-app class="container">
     <v-card>
       <v-tabs color="light-blue darken-1" left>
         <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
@@ -31,7 +31,12 @@
         </v-tab-item>
         <v-tab-item>
           <v-container fluid>
-            <ContactAdmin />
+            <AdminUsers />
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container fluid>
+            <ContactUs />
           </v-container>
         </v-tab-item>
       </v-tabs>
@@ -45,7 +50,9 @@ import ClassesList from "./ClassesList";
 import TeachersList from "./TeachersList";
 import AdminTeacherSchedule from "./AdminTeacherSchedule";
 import AdminClassSchedule from "./AdminClassSchedule";
-import ContactAdmin from "./ContactAdmin";
+import AdminUsers from "./AdminUsers";
+import ContactUs from "../admin/ContactAdmin";
+
 export default {
   name: "Admin",
   components: {
@@ -54,7 +61,8 @@ export default {
     TeachersList,
     AdminTeacherSchedule,
     AdminClassSchedule,
-    ContactAdmin,
+    AdminUsers,
+    ContactUs,
   },
   data: () => ({
     tabs: [
@@ -63,16 +71,11 @@ export default {
       "Parent vew",
       "Class Schedule",
       "Teacher Schedule",
-      "Contact"
+      "Users Manager",
+      "ContactUs",
     ],
-    components: [StudentsList, ClassesList, TeachersList],
   }),
 };
 </script>
 
-<style lang="scss" scoped>
-div#adminwidth {
-  width: 1050px;
-  margin-left: 257px;
-}
-</style>
+<style lang="scss" scoped></style>

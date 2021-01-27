@@ -4,7 +4,9 @@
       <v-row class="justify-center">
         <v-col>
           <v-card class="pa-2">
-            <h5>My Grades :</h5>
+            <h5 v-for="(student, index) in dynamicList" :key="index">
+              {{ student.name }} Grades :
+            </h5>
             <v-divider></v-divider>
             <v-simple-table fixed-header height="300px">
               <template v-slot:default>
@@ -42,7 +44,9 @@
             </v-card-title>
 
             <v-card-subtitle>
-              <h6>{{ student.class }}</h6>
+              <h6><b>Class : </b> {{ student.class }}</h6>
+              <v-spacer></v-spacer>
+              <h6><b>Student Id : </b>{{ student.studentId }}</h6>
             </v-card-subtitle>
 
             <v-card-actions>
@@ -89,24 +93,7 @@ export default {
   },
   data() {
     return {
-      fields: [
-        {
-          field: "Maths",
-          grade: 18,
-        },
-        {
-          field: "Sciences",
-          grade: 18,
-        },
-        {
-          field: "Physics",
-          grade: 18,
-        },
-        {
-          field: "Moyenne",
-          grade: 18,
-        },
-      ],
+      fields: [],
       dynamicList: [],
       students: [],
     };
@@ -126,6 +113,16 @@ export default {
     console.log(studentsList.data);
     this.prepareDynamicList();
     this.fetched = true;
+    var grade = await axios.get("http://localhost:7000/api/grades");
+    var item = grade.data.splice(0, 1)[0];
+    delete item._id && delete item.name && delete item.__v;
+    for (var key in item) {
+      this.fields.push({
+        field: key,
+        grade: item[key],
+      });
+    }
+    console.log(grade.data.splice(0, 1));
   },
 };
 </script>

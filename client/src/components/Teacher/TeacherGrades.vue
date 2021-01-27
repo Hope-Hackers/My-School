@@ -117,7 +117,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "TeacherGrades",
   data: () => ({
@@ -187,6 +186,7 @@ export default {
       this.dialogDelete = true;
     },
     async deleteItemConfirm() {
+      console.log(this.editedItem);
       var deleted = await axios.delete(
         `http://localhost:7000/api/grades/delete/${this.editedItem._id}`
       );

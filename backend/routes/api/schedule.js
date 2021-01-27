@@ -4,6 +4,15 @@ const services = require("../../models/schedule");
 
 router.get("/", async (req, res) => {
   try {
+    var Schedules = await services.find({}).sort({ Time: 1 });
+    res.send(Schedules);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+router.get("/withoutid", async (req, res) => {
+  try {
     var Schedules = await services.find({}, { _id: 0 }).sort({ Time: 1 });
     res.send(Schedules);
   } catch (error) {

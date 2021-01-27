@@ -32,7 +32,7 @@ router.post("/create", async (req, res) => {
 
 router.delete("/delete/:id", async (req, res) => {
   try {
-    await services.deleteOne({_id: req.params.id});
+    await services.deleteOne({ _id: req.params.id });
     res.send({ status: true });
   } catch (err) {
     res.send({ err, status: false });
@@ -41,12 +41,34 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    var newClassSchedule = await services.findOneAndUpdate({_id: req.body._id},req.body,{useFindAndModify: false});
+    var newClassSchedule = await services.findOneAndUpdate(
+      { _id: req.body._id },
+      req.body,
+      { useFindAndModify: false }
+    );
     console.log(newClassSchedule);
     res.send({ newClassSchedule, status: true });
   } catch (err) {
     res.send({ err, status: false });
   }
 });
+
+router.post('/filter', async (req, res) => {
+  try {
+    var classSchedule = await services.find(req.body,{_id:0,class:0}).sort({"time":1});
+      res.send({classSchedule,status:true})
+  } catch (err) {
+      res.send({err,status:false})
+  }
+})
+
+router.post('/filterid', async (req, res) => {
+  try {
+    var classSchedule = await services.find(req.body,{class:0}).sort({"time":1});
+      res.send({classSchedule,status:true})
+  } catch (err) {
+      res.send({err,status:false})
+  }
+})
 
 module.exports = router;

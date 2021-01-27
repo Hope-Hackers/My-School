@@ -2,28 +2,20 @@
   <div data-app>
     <v-data-table
       :headers="headers"
-      :items="students"
+      :items="row"
       :search="search"
-      sort-by="name"
+      sort-by="time"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>All Students</v-toolbar-title>
+          <v-toolbar-title>Users Manager</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn small class="mb-2" v-bind="attrs" v-on="on">
-                Add Student
+                Add User
               </v-btn>
             </template>
             <v-card>
@@ -36,33 +28,40 @@
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.studentId"
-                        label="Student Id"
+                        v-model="editedItem.firstName"
+                        label="First Name"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.image"
-                        label="image url"
+                        v-model="editedItem.lastName"
+                        label="Last Name"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.name"
-                        label="full name"
+                        v-model="editedItem.email"
+                        label="Email"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.class"
-                        label="class"
+                        v-model="editedItem.password"
+                        label="Password"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.description"
-                        label="description"
+                        v-model="editedItem.childId"
+                        label="Child Id"
                       ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.role"
+                        :items="roles"
+                        label="Role"
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -118,7 +117,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "StudentsTable",
+  name: "AdminTeacherSchedule",
   data: () => ({
     search: "",
     dialog: false,
@@ -126,34 +125,37 @@ export default {
     fetched: false,
     headers: [
       {
-        text: "Student Id",
+        text: "First Name",
+        value: "firstName",
         align: "start",
         sortable: false,
-        value: "studentId",
       },
-      // { text: 'Image URL', value: 'image' },
-      // { text: 'Full Name', value: 'name' },
-      { text: "Name", value: "name" },
-      { text: "Class", value: "class" },
-      { text: "Description", value: "description" },
+      { text: "Last Name", value: "lastName" },
+      { text: "Email", value: "email" },
+      { text: "Child Id", value: "childId" },
+      // { text: 'Password', value: 'password' },
+      { text: "Role", value: "role" },
       { text: "Actions", value: "actions", sortable: false },
     ],
+    roles:["Admin", "Parent", "Teacher"],
     items: [],
-    students: [],
+    row: [],
     editedIndex: -1,
     editedItem: {
-      studentId: 0,
-      image: "",
-      name: "",
-      class: "",
-      description: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      childId: 0,
+      password: "",
+      role: "",
     },
     defaultItem: {
-      studentId: 0,
-      image: "",
-      name: "",
-      class: "",
-      description: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      childId: 0,
+      password: "",
+      role: "",
     },
   }),
   computed: {
@@ -174,22 +176,22 @@ export default {
   },
   methods: {
     initialize() {
-      this.students = this.items;
+      this.row = this.items;
     },
     editItem(item) {
-      this.editedIndex = this.students.indexOf(item);
+      this.editedIndex = this.row.indexOf(item);
       this.editedItem = item;
       this.dialog = true;
     },
     deleteItem(item) {
-      this.editedIndex = this.students.indexOf(item);
+      this.editedIndex = this.row.indexOf(item);
       this.editedItem = item;
       this.dialogDelete = true;
     },
     async deleteItemConfirm() {
       console.log(this.editedItem);
       var deleted = await axios.delete(
-        `http://localhost:7000/api/classstudents/delete/${this.editedItem._id}`
+        `http://localhost:7000/api/users/delete/${this.editedItem._id}`
       );
       if (deleted.data.status) {
         this.$vs.notification({
@@ -198,7 +200,7 @@ export default {
           position: "top-right",
           color: "success",
         });
-        this.students.splice(this.editedIndex, 1);
+        this.row.splice(this.editedIndex, 1);
       } else {
         this.$vs.notification({
           text: "Try again later",
@@ -234,7 +236,7 @@ export default {
           }
         }
         var updated = await axios.post(
-          "http://localhost:7000/api/classstudents/update",
+          "http://localhost:7000/api/users/update",
           this.editedItem
         );
         if (updated.data.status) {
@@ -244,7 +246,7 @@ export default {
             position: "top-right",
             color: "success",
           });
-          this.students[this.editedIndex] = this.editedItem;
+          this.row[this.editedIndex] = this.editedItem;
         } else {
           this.$vs.notification({
             text: "Try again later",
@@ -255,11 +257,11 @@ export default {
         }
       } else {
         var created = await axios.post(
-          "http://localhost:7000/api/classstudents/create",
+          "http://localhost:7000/api/users/createUser",
           this.editedItem
         );
         console.log(created.data);
-        if (created.data) {
+        if (!created.data.msg) {
           this.$vs.notification({
             text: "Added successfully",
             title: "Notification",
@@ -267,7 +269,7 @@ export default {
             color: "success",
           });
           this.editedItem = created.data;
-          this.students.push(this.editedItem);
+          this.row.push(this.editedItem);
         } else {
           this.$vs.notification({
             text: "Try again later",
@@ -281,11 +283,10 @@ export default {
     },
   },
   async mounted() {
-    var studentsList = await axios.get(
-      "http://localhost:7000/api/classstudents"
-    );
-    this.students = studentsList.data;
-    console.log(studentsList.data);
+    var users = await axios.get("http://localhost:7000/api/users");
+    console.log(users.data);
+    this.row = users.data;
+    console.log(users.data);
     this.fetched = true;
   },
 };

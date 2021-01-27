@@ -62,12 +62,12 @@ export default new Router({
           index: 8,
         },
         {
-          path: "UpdateTemplate",
+          path: "Updates",
           component: () => import("./components/UpdateTemplate.vue"),
           index: 9,
         },
         {
-          path: "NewsTemplate",
+          path: "News",
           component: () => import("./components/NewsTemplate.vue"),
           index: 10,
         },

@@ -39,4 +39,13 @@ router.post("/update", async (req, res) => {
   }
 });
 
+router.post('/filter', async (req, res) => {
+  try {
+    var classStudents = await services.find(req.body)
+      res.send({classStudents,status:true})
+  } catch (err) {
+      res.send({err,status:false})
+  }
+})
+
 module.exports = router;
