@@ -105,16 +105,33 @@ export default {
       });
     },
   },
-  async mounted() {
-    var studentsList = await axios.get(
-      "http://localhost:7000/api/classstudents"
+  async beforeMount() {
+    var parent = await axios.post(
+      "http://localhost:7000/api/users/filterByToken",
+      {
+        token: localStorage.token,
+      }
     );
-    this.students = studentsList.data.splice(0, 1);
-    console.log(studentsList.data);
+    var classStudent = await axios.post(
+      "http://localhost:7000/api/classStudents/filter",
+      { studentId: parent.data.childId }
+    );
+    this.students = [
+      JSON.parse(JSON.stringify(classStudent.data.classStudents)),
+    ];
     this.prepareDynamicList();
-    this.fetched = true;
-    var grade = await axios.get("http://localhost:7000/api/grades");
-    var item = grade.data.splice(0, 1)[0];
+
+    var classSchedule = await axios.post(
+      "http://localhost:7000/api/classSchedule/filter",
+      { class: classStudent.data.classStudents.class }
+    );
+    console.log(classSchedule.data.classSchedule);
+
+    var grades = await axios.post("http://localhost:7000/api/grades/filter", {
+      name: classStudent.data.classStudents.name.toLowerCase(),
+    });
+    console.log(grades.data);
+    var item = grades.data;
     delete item._id && delete item.name && delete item.__v;
     for (var key in item) {
       this.fields.push({
@@ -122,7 +139,6 @@ export default {
         grade: item[key],
       });
     }
-    console.log(grade.data.splice(0, 1));
   },
 };
 </script>

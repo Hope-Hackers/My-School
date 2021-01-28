@@ -32,20 +32,27 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    var newStudent = await services.findByIdAndUpdate({_id: req.body._id},req.body,{});
+    var newStudent = await services.findByIdAndUpdate(
+      { _id: req.body._id },
+      req.body,
+      {}
+    );
     res.send({ newStudent, status: true });
   } catch (err) {
     res.send({ err, status: false });
   }
 });
 
-router.post('/filter', async (req, res) => {
+router.post("/filter", async (req, res) => {
   try {
-    var classStudents = await services.find(req.body)
-      res.send({classStudents,status:true})
+    req.body.studentID = Number(req.body.studentID);
+    var classStudents = await services.findOne({
+      studentID: req.body.studentID,
+    });
+    res.send({ classStudents, status: true });
   } catch (err) {
-      res.send({err,status:false})
+    res.send({ err, status: false });
   }
-})
+});
 
 module.exports = router;

@@ -1,7 +1,21 @@
 import Vue from "vue";
+import axios from "axios";
 import Router from "vue-router";
 
 Vue.use(Router);
+
+const isAdmin = async function(next) {
+  let user = await axios.post("http://localhost:7000/api/users/filterByToken", {
+    token: localStorage.token,
+  });
+  console.log("here", user);
+  if (user.data && user.data.role == "Admin") {
+    next();
+  } else {
+    localStorage.clear();
+    next({ path: `/login` });
+  }
+};
 
 export default new Router({
   mode: "history",
@@ -55,6 +69,9 @@ export default new Router({
           path: "/admin",
           component: () => import("./components/admin/Admin.vue"),
           index: 7,
+          beforeEnter: (to, from, next) => {
+            isAdmin(next);
+          },
         },
         {
           path: "/ContactAdmin",
@@ -70,6 +87,11 @@ export default new Router({
           path: "News",
           component: () => import("./components/NewsTemplate.vue"),
           index: 10,
+        },
+        {
+          path: "/parent",
+          component: () => import("./components/Teacher/StudentGrades.vue"),
+          index: 11,
         },
       ],
     },

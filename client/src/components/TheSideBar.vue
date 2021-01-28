@@ -18,6 +18,30 @@
           Home
         </vs-sidebar-item>
       </span>
+      <span v-if="this.role == 'Parent'" @click="redirectParentDashboard">
+        <vs-sidebar-item id="market">
+          <template #icon>
+            <i class="bx bx-grid-alt"></i>
+          </template>
+          Parent Dashboard
+        </vs-sidebar-item>
+      </span>
+      <span v-if="this.role == 'Admin'" @click="redirectAdminDashboard">
+        <vs-sidebar-item id="market">
+          <template #icon>
+            <i class="bx bx-grid-alt"></i>
+          </template>
+          Admin Dashboard
+        </vs-sidebar-item>
+      </span>
+      <span v-if="this.role == 'Teacher'" @click="redirectTeacherDashboard">
+        <vs-sidebar-item id="market">
+          <template #icon>
+            <i class="bx bx-grid-alt"></i>
+          </template>
+          Teacher Dashboard
+        </vs-sidebar-item>
+      </span>
       <span @click="redirectProfil">
         <vs-sidebar-item id="Profile">
           <template #icon>
@@ -34,42 +58,6 @@
           Chat
         </vs-sidebar-item>
       </span>
-      <vs-sidebar-group>
-        <template #header>
-          <vs-sidebar-item arrow>
-            <template #icon>
-              <i class="bx bx-group"></i>
-            </template>
-            Social media
-          </vs-sidebar-item>
-        </template>
-
-        <vs-sidebar-item id="Instagram">
-          <template #icon>
-            <i class="bx bxl-instagram"></i>
-          </template>
-          Instagram
-        </vs-sidebar-item>
-        <vs-sidebar-item id="twitter">
-          <template #icon>
-            <i class="bx bxl-twitter"></i>
-          </template>
-          Twitter
-        </vs-sidebar-item>
-        <vs-sidebar-item id="Facebook">
-          <template #icon>
-            <i class="bx bxl-facebook"></i>
-          </template>
-          Facebook
-        </vs-sidebar-item>
-      </vs-sidebar-group>
-
-      <vs-sidebar-item id="Calendar">
-        <template #icon>
-          <i class="bx bx-calendar"></i>
-        </template>
-        Calendar
-      </vs-sidebar-item>
       <vs-sidebar-item id="Event">
         <template #icon>
           <i class="bx bxs-calendar-event"></i>
@@ -84,17 +72,6 @@
           Contact Us
         </vs-sidebar-item>
       </span>
-      <template #footer>
-        <vs-row justify="space-between">
-          <vs-avatar badge-color="danger" badge-position="top-right">
-            <i class="bx bx-bell"></i>
-
-            <template #badge>
-              28
-            </template>
-          </vs-avatar>
-        </vs-row>
-      </template>
     </vs-sidebar>
   </div>
 </template>
@@ -118,9 +95,19 @@ export default {
     redirectContactUs() {
       this.$router.push("/ContactUs");
     },
+    redirectParentDashboard() {
+      this.$router.push("/parent");
+    },
+    redirectAdminDashboard() {
+      this.$router.push("/admin");
+    },
+    redirectTeacherDashboard() {
+      this.$router.push("/teacher");
+    },
   },
   mounted() {
     this.name = localStorage.getItem("Username");
+    this.role = localStorage.getItem("Role");
   },
 };
 </script>
