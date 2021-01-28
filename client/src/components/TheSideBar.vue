@@ -58,12 +58,14 @@
           Chat
         </vs-sidebar-item>
       </span>
-      <vs-sidebar-item id="Event">
-        <template #icon>
-          <i class="bx bxs-calendar-event"></i>
-        </template>
-        Event
-      </vs-sidebar-item>
+      <span @click="redirectEvent">
+        <vs-sidebar-item id="Event">
+          <template #icon>
+            <i class="bx bxs-calendar-event"></i>
+          </template>
+          Event
+        </vs-sidebar-item>
+      </span>
       <span @click="redirectContactUs">
         <vs-sidebar-item id="Contact Us">
           <template #icon>
@@ -103,6 +105,9 @@ export default {
     },
     redirectTeacherDashboard() {
       this.$router.push("/teacher");
+    },
+    redirectEvent() {
+      this.$router.push("/events");
     },
   },
   mounted() {

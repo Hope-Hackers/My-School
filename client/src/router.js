@@ -93,6 +93,26 @@ export default new Router({
           component: () => import("./components/Teacher/StudentGrades.vue"),
           index: 11,
         },
+        {
+          path: "event",
+          component: () => import("./components/EventTemplate.vue"),
+          index: 12,
+        },
+        {
+          path: "service",
+          component: () => import("./components/ServiceTemplate.vue"),
+          index: 13,
+        },
+        {
+          path: "activity",
+          component: () => import("./components/ActivityTemplate.vue"),
+          index: 14,
+        },
+        {
+          path: "events",
+          component: () => import("./components/Events.vue"),
+          index: 15,
+        },
       ],
     },
   ],

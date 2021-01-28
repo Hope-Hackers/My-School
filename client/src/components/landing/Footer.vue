@@ -10,14 +10,31 @@
             id="footer-logo"
           /><br />
           <h5>Contact Us:</h5>
-          <br />
-          <p>E-mail: myschool@gmail.com</p>
-          <br />
-          <p>Phone number: +216 71 20 89 23</p>
-          <br />
-          <a class="rs" href="#">LinkedIn</a>&nbsp;&nbsp;
-          <a class="rs" href="#">Instagram</a>&nbsp;&nbsp;
-          <a class="rs" href="#">Facebook</a>
+          <div class="col-md-12">
+            <br />
+            <ul class="social-network social-circle">
+              <li>
+                <a href="#" class="icoFacebook" title="Facebook"
+                  ><i class="fa fa-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="icoGoogle" title="Google +"
+                  ><i class="fa fa-google-plus"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="icoinstagram" title="instagram"
+                  ><i class="fa fa-instagram"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="icolinkedin" title="linkedin"
+                  ><i class="fa fa-linkedin"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="col-6">
           <div class="copyright">
@@ -27,6 +44,7 @@
               <a href="#" target="_blank" id="hope">Hope-Hackers </a>
             </p>
           </div>
+          <div></div>
         </div>
         <div class="col-2">
           <div>
@@ -51,7 +69,7 @@
 </template>
 <script>
 export default {
-  name: "Footer",
+  name: "footer",
   data() {
     return {
       info: null,
@@ -125,5 +143,73 @@ export default {
 }
 #hope {
   color: black;
+}
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0px !important;
+  padding: 0;
+  float: left;
+}
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+.social-network a.icoYt:hover {
+  background-color: #e52d27;
+}
+.social-network a.icoFacebook:hover {
+  background-color: #3b5998;
+}
+
+.social-network a.icoinstagram:hover {
+  background-color: #e99c00;
+}
+.social-network a.icolinkedin:hover {
+  background-color: #291ad3c4;
+}
+
+.social-network a.icoGoogle:hover {
+  background-color: #bd3518;
+}
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #2b603e7a;
+  margin-top: 36px;
+}
+.social-circle li i {
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 3.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.8s;
+}
+.social-circle i {
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
 }
 </style>
