@@ -4,6 +4,7 @@ const app = express();
 const send = require("../../server.js");
 app.use(express.json());
 const Messages = require("../../models/messages");
+const User = require("../../models/User");
 
 router.post("/postMessage", async (req, res) => {
   senderId = req.body.uuid;
@@ -22,7 +23,6 @@ router.post("/postMessage", async (req, res) => {
   res.send(message);
 });
 router.get("/getMessages", async (req, res) => {
-  console.log(req.query);
   let mess = await Messages.find({
     senderId: req.query.id1,
     receiverId: req.query.id2,
@@ -47,4 +47,39 @@ router.get("/getMessages", async (req, res) => {
   });
   res.send(mess);
 });
+
+router.get("/users", async (req, res) => {
+  let myId = req.query.id;
+  let users = [];
+  let allMessages = await Messages.find(
+    {
+      $or: [{ senderId: myId }, { receiverId: myId }],
+    },
+    { senderId: 1, receiverId: 1, _id: 0 }
+  )
+    .sort({ date: -1 })
+    .exec();
+  for (let msg of allMessages) {
+    if (msg.senderId == myId && !users.includes(msg.receiverId)) {
+      users.push(msg.receiverId);
+    } else if (msg.receiverId == myId && !users.includes(msg.senderId)) {
+      users.push(msg.senderId);
+    }
+  }
+  let usersData = await User.find(
+    {
+      messangerId: { $in: users }, //return if messangerId inside list of users
+    },
+    { firstName: 1, lastName: 1, messangerId: 1, _id: 0 }
+  ).exec();
+  res.json(
+    usersData.map((item) => {
+      return {
+        name: item.firstName + " " + item.lastName,
+        id: item.messangerId,
+      };
+    })
+  );
+});
+
 module.exports = router;

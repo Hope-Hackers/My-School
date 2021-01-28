@@ -37,27 +37,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
-      ChatTeachers: [
-        {
-          name: "Melek Houidi",
-          id: 123,
-        },
-        {
-          name: "Khaled Yeferni ",
-          id: 133,
-        },
-        {
-          name: "Zied sradki ",
-          id: 143,
-        },
-        {
-          name: "Wael Jouini ",
-          id: 153,
-        },
-      ],
       hasOpenLoading: false,
       types: ["square"],
     };
@@ -89,6 +73,19 @@ export default {
         this.openLoading(type, `box${i}`);
       });
     },
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:7000/api/messages/users?id=${this.uuid}`)
+      .then((response) => {
+        this.$store.commit("setChatMembers", response.data);
+      });
+  },
+  computed: {
+    ...mapGetters({
+      uuid: "getMyUuid",
+      ChatTeachers: "getChatMembers",
+    }),
   },
 };
 </script>
