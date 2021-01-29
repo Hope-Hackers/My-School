@@ -44,6 +44,8 @@ app.use("/api/grades", require("./routes/api/grades"));
 app.use("/api/classSchedule", require("./routes/api/classSchedule"));
 app.use("/api/classStudents", require("./routes/api/classStudents"));
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/events", require("./routes/api/events"));
+
 const PORT = process.env.PORT || 7000;
 
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));

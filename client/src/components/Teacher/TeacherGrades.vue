@@ -281,9 +281,6 @@ export default {
   },
   async mounted() {
     var grade = await axios.get("http://localhost:7000/api/grades");
-    // for (var i = 0; i < grade.data.length; i++){
-    //   this.items.push(grade.data[i])
-    // }
     this.students = grade.data;
     console.log(grade.data);
     this.fetched = true;

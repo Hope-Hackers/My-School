@@ -43,4 +43,13 @@ router.post("/update", async (req, res) => {
   }
 });
 
+router.post("/filter", async (req, res) => {
+  try {
+    var grades = await services.findOne(req.body);
+    res.send(grades);
+  } catch (err) {
+    res.send({ err, status: false });
+  }
+});
+
 module.exports = router;

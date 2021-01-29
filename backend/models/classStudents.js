@@ -18,10 +18,6 @@ const classStudentsSchema = new Schema({
   description: {
     type: String,
   },
-  // parent: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'user'
-  // }
 },{
     versionKey: false // set to false then it wont create in mongodb
 });

@@ -182,6 +182,7 @@ export default {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("messangerId", response.data.messangerId);
             localStorage.setItem("Username", response.data.username);
+            localStorage.setItem("Role", response.data.role);
             this.$router.push("/");
             window.location.reload();
           });

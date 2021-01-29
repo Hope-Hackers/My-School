@@ -7,6 +7,7 @@ const state = {
   me: {},
   room: "",
   history: [],
+  chatMembers:[]
 };
 //save the connected user ID to Vuex store
 const mutations = {
@@ -27,6 +28,9 @@ const mutations = {
   setroom(state, num) {
     state.room = num;
   },
+  setChatMembers(state, members) {
+    state.chatMembers = members;
+  },
 };
 
 //Get Data from vuex store
@@ -34,6 +38,7 @@ const getters = {
   getMyUuid: (state) => state.me.uuid,
   getHistoryMsgs: (state) => state.history,
   getroom: (state) => state.room,
+  getChatMembers: (state) => state.chatMembers,
 };
 
 export default new Vuex.Store({
