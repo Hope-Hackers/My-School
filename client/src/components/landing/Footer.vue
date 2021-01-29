@@ -69,7 +69,7 @@
 </template>
 <script>
 export default {
-  name: "footer",
+  name: "Footer",
   data() {
     return {
       info: null,
