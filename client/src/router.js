@@ -1,15 +1,40 @@
 import Vue from "vue";
-import axios from "axios";
 import Router from "vue-router";
-
+import axios from "axios";
 Vue.use(Router);
 
 const isAdmin = async function(next) {
   let user = await axios.post("http://localhost:7000/api/users/filterByToken", {
-    token: localStorage.token,
+    token:localStorage.token
   });
-  console.log("here", user);
+  console.log('here',user)
   if (user.data && user.data.role == "Admin") {
+    next();
+  } else {
+    localStorage.clear();
+    next({ path: `/login` });
+  }
+};
+
+const isTeacher = async function(next) {
+  let user = await axios.post("http://localhost:7000/api/users/filterByToken", {
+    token:localStorage.token
+  });
+  console.log('here',user)
+  if (user.data && user.data.role == "Teacher") {
+    next();
+  } else {
+    localStorage.clear();
+    next({ path: `/login` });
+  }
+};
+
+const isParent = async function(next) {
+  let user = await axios.post("http://localhost:7000/api/users/filterByToken", {
+    token:localStorage.token
+  });
+  console.log('here',user)
+  if (user.data && user.data.role == "Parent") {
     next();
   } else {
     localStorage.clear();
@@ -59,6 +84,9 @@ export default new Router({
           path: "/Teacher",
           component: () => import("./components/Teacher/Teacher.vue"),
           index: 5,
+          beforeEnter: (to, from, next) => {
+            isTeacher(next);
+          },
         },
         {
           path: "/ChatStructure",
@@ -92,25 +120,53 @@ export default new Router({
           path: "/parent",
           component: () => import("./components/Teacher/StudentGrades.vue"),
           index: 11,
+          beforeEnter: (to, from, next) => {
+            isParent(next);
+          },
         },
         {
           path: "event",
           component: () => import("./components/EventTemplate.vue"),
-          index: 12,
+          index: 11,
         },
         {
           path: "service",
           component: () => import("./components/ServiceTemplate.vue"),
-          index: 13,
+          index: 12,
         },
         {
           path: "activity",
           component: () => import("./components/ActivityTemplate.vue"),
-          index: 14,
+          index: 13,
         },
         {
           path: "events",
           component: () => import("./components/Events.vue"),
+          index: 14,
+        },
+        {
+          path: "courses",
+          component: () => import("./components/home/Content/Courses.vue"),
+          index: 15,
+        },
+        {
+          path: "classes",
+          component: () => import("./components/home/Content/Classes.vue"),
+          index: 15,
+        },
+        {
+          path: "activites",
+          component: () => import("./components/home/Content/Activites.vue"),
+          index: 15,
+        },
+        {
+          path: "NewsItem",
+          component: () => import("./components/home/Content/NewsItem.vue"),
+          index: 15,
+        },
+        {
+          path: "update",
+          component: () => import("./components/home/Content/update.vue"),
           index: 15,
         },
       ],

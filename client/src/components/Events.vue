@@ -3,26 +3,43 @@
     <div class="heading">
       <!-- uuid : unique user ID -->
     </div>
-
     <div class="center">
-      <div class="property-card" v-for="(item, index) in info" :key="index">
-        <a href="#">
-          <div
-            class="property-image"
-            :style="{ backgroundImage: `url(${item.img})` }"
-          >
-            <div class="property-image-title"></div></div
-        ></a>
+      <!-- start test -->
 
-        <div class="property-description">
-          <h5>{{ item.title }}</h5>
-          <p>
+      <div  v-for="(item, index) in info" :key="index">
+        <v-col>
+        <v-card class="mx-auto" max-width="344">
+          <v-img :src="item.img" height="200px"></v-img>
+
+          <v-card-title>
+            <a>{{ item.title }}</a>
+          </v-card-title>
+
+          <v-card-subtitle>
             {{ item.author }}
-          </p>
-        </div>
+          </v-card-subtitle>
+
+          <v-card-actions>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon @click="show = !show">
+              <v-icon>{{
+                show ? "mdi-chevron-up" : "mdi-chevron-down"
+              }}</v-icon>
+            </v-btn>
+          </v-card-actions>
+
+          <v-expand-transition>
+            <div v-show="show">
+              <v-divider></v-divider>
+              {{ item.body }}
+            </div>
+          </v-expand-transition>
+        </v-card>
+        </v-col>
       </div>
     </div>
-
     <div class="body"></div>
   </div>
 </template>
@@ -34,6 +51,7 @@ export default {
   name: "event-container",
   data() {
     return {
+      show: false,
       info: null,
     };
   },

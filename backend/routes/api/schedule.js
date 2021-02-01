@@ -22,7 +22,6 @@ router.get("/withoutid", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
-    console.log("req", req.body);
     var newSchedule = await services.create(req.body);
     res.send(newSchedule);
   } catch (err) {

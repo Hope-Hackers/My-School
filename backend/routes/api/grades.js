@@ -4,7 +4,7 @@ const services = require("../../models/grades");
 
 router.get("/", async (req, res) => {
   try {
-    var Grades = await services.find({}, { _id: 0 });
+    var Grades = await services.find({});
     res.send(Grades);
   } catch (error) {
     res.send(error);
@@ -42,14 +42,12 @@ router.post("/update", async (req, res) => {
     res.send({ err, status: false });
   }
 });
-
 router.post("/filter", async (req, res) => {
   try {
-    var grades = await services.findOne(req.body);
-    res.send(grades);
+    var grades = await services.findOne(req.body)
+    res.send(grades)
   } catch (err) {
     res.send({ err, status: false });
   }
 });
-
 module.exports = router;

@@ -13,7 +13,7 @@
               <img src="images/SL12.jpg" alt="Image" class="img-fluid" />
             </p>
             <h3>
-              ARTS <br />PAINT A PORTRAIT IN OIL. PLAY LANCELOT IN “SPAMALOT.”
+              ARTS <br />paint a portrait in oil. play lancelot in “SPAMALOT.”
               SING A CAPELLA. BUILD AN ELECTRIC GUITAR. WRITE A POEM. COMPOSE A
               SONG. PERFORM A CONCERTO. DIRECT A MOVIE. WRITE A NEWS ARTICLE.
               ANYTHING ARTISTIC IS POSSIBLE AT MY SCHOOL.
@@ -30,11 +30,10 @@
               studying the development of Western music.
             </h3>
             <h3>
-              THEATRE<br />
-              Theatre thrives at MY SCHOOL. Through dramatics, students forge a
-              shared sense of purpose and become an indissoluble team as they
-              work together to mount a production, from Lower School class pays
-              to Middle School productions to one of five tri-school Upper
+              THEATRE<br> Theatre thrives at MY SCHOOL. Through dramatics, students
+              forge a shared sense of purpose and become an indissoluble team as
+              they work together to mount a production, from Lower School class
+              pays to Middle School productions to one of five tri-school Upper
               School plays. Theatre is about much more than just story telling;
               and, it is also about much more than a celebration of the self and
               one's own abilities.

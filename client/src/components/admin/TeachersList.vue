@@ -1,15 +1,15 @@
 <template>
   <div>
-    <StudentGrades />
+    <StudentGradesAdmin />
   </div>
 </template>
 
 <script>
-import StudentGrades from "../Teacher/StudentGrades";
+import StudentGradesAdmin from "../Teacher/StudentGradesAdmin";
 export default {
   name: "TeachersList",
   components: {
-    StudentGrades,
+    StudentGradesAdmin,
   },
 };
 </script>

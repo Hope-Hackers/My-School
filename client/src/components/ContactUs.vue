@@ -60,10 +60,8 @@ export default {
       email: "",
       message: "",
     },
-
     isSending: false,
   }),
-
   methods: {
     /**
      * Clear the form
@@ -73,22 +71,18 @@ export default {
         this.contact[field] = "";
       }
     },
-
     /**
      * Handler for submit
      */
     onSubmit(evt) {
       evt.preventDefault();
-
       this.isSending = true;
-
       setTimeout(() => {
         // Build for data
         let form = new FormData();
         for (let field in this.contact) {
           form.append(field, this.contact[field]);
         }
-
         // Send form to server
         axios
           .post("http://localhost:7000/api/contact/ContactUs", this.contact)
@@ -157,7 +151,6 @@ div#contact-form {
   text-align: center;
   text-transform: uppercase;
 }
-
 .contact-form input[type="email"],
 .contact-form input[type="text"],
 .contact-form textarea,
