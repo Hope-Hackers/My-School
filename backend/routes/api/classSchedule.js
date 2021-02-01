@@ -55,7 +55,7 @@ router.post("/update", async (req, res) => {
 
 router.post('/filter', async (req, res) => {
   try {
-    var classSchedule = await services.find(req.body,{_id:0,class:0}).sort({"time":1});
+    var classSchedule = await services.find(req.body, { _id: 0,class:0 }).sort({ "time": 1 });
       res.send({classSchedule,status:true})
   } catch (err) {
       res.send({err,status:false})

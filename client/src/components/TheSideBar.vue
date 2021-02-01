@@ -21,7 +21,7 @@
       <span v-if="this.role == 'Parent'" @click="redirectParentDashboard">
         <vs-sidebar-item id="market">
           <template #icon>
-            <i class="bx bx-grid-alt"></i>
+            <i class='bx bx-grid-alt'></i>
           </template>
           Parent Dashboard
         </vs-sidebar-item>
@@ -29,7 +29,7 @@
       <span v-if="this.role == 'Admin'" @click="redirectAdminDashboard">
         <vs-sidebar-item id="market">
           <template #icon>
-            <i class="bx bx-grid-alt"></i>
+            <i class='bx bx-grid-alt'></i>
           </template>
           Admin Dashboard
         </vs-sidebar-item>
@@ -37,7 +37,7 @@
       <span v-if="this.role == 'Teacher'" @click="redirectTeacherDashboard">
         <vs-sidebar-item id="market">
           <template #icon>
-            <i class="bx bx-grid-alt"></i>
+            <i class='bx bx-grid-alt'></i>
           </template>
           Teacher Dashboard
         </vs-sidebar-item>
@@ -59,12 +59,12 @@
         </vs-sidebar-item>
       </span>
       <span @click="redirectEvent">
-        <vs-sidebar-item id="Event">
-          <template #icon>
-            <i class="bx bxs-calendar-event"></i>
-          </template>
-          Event
-        </vs-sidebar-item>
+      <vs-sidebar-item id="Event">
+        <template #icon>
+          <i class="bx bxs-calendar-event"></i>
+        </template>
+        Event
+      </vs-sidebar-item>
       </span>
       <span @click="redirectContactUs">
         <vs-sidebar-item id="Contact Us">

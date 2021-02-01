@@ -77,7 +77,7 @@ export default {
 };
 </script>
 <style>
-html {
+/* html {
   overflow: scroll !important;
-}
+} */
 </style>

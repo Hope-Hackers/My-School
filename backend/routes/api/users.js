@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtDecode = require("jwt-decode");
 const User = require("../../models/User");
-
+const jwtDecode = require('jwt-decode')
 const { check, validationResult } = require("express-validator");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -46,7 +46,7 @@ router.post(
         return res.send({ msg: "User alredy exists" });
       }
       // Instance User
-
+      messangerId = fourCharID();
       user = new User({
         firstName,
         lastName,
@@ -54,6 +54,7 @@ router.post(
         password,
         childId,
         role,
+        messangerId,
       });
 
       // Encrypt password
@@ -62,12 +63,38 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       // JWT Token generation
       var created = await user.save();
+      // const payload = {
+      //   user: {
+      //     id: user.id,
+      //   },
+      // };
       res.send(created);
+      // jwt.sign(
+      //   payload,
+      //   config.get("jwtSecret"),
+      //   { expiresIn: 360000 },
+      //   (err, token) => {
+      //     if (err) throw err;
+      //     res.json({ token });
+      //   }
+      // );
     } catch (err) {
       res.send({ msg: "Server error" });
     }
   }
 );
+
+function fourCharID() {
+  const maxLength = 4;
+  const possible = "abcdef0123456789";
+  let text = "";
+
+  for (let i = 0; i < maxLength; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+}
 
 router.delete("/delete/:id", async (req, res) => {
   try {
@@ -80,24 +107,22 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    var newUser = await User.findOneAndUpdate({ _id: req.body._id }, req.body, {
-      useFindAndModify: false,
-    });
+    var newUser = await User.findOneAndUpdate({ _id: req.body._id },req.body,{useFindAndModify: false,});
     res.send({ newUser, status: true });
   } catch (err) {
     res.send({ err, status: false });
   }
 });
 
-router.post("/filterByToken", async (req, res) => {
+router.post('/filterByToken', async (req, res) => {
   try {
-    var userId = jwtDecode(req.body.token).user.id;
-    var user = await User.findOne({ _id: userId }).select("-password");
-    console.log(user);
-    res.send(user);
+    var userId = jwtDecode(req.body.token).user.id
+    var user = await User.findOne({ _id: userId }).select("-password")
+    console.log(user)
+    res.send(user)
   } catch (err) {
-    res.send({ err, status: false });
+      res.send({err, status:false})
   }
-});
+})
 
 module.exports = router;

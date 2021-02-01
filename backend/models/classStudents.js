@@ -1,25 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const classStudentsSchema = new Schema({
-  studentId: {
-    type: Number,
-    unique: true
+const classStudentsSchema = new Schema(
+  {
+    studentId: Number,
+    image: String,
+    name: String,
+    class: String,
+    description: String,
   },
-  image: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  class: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-},{
-    versionKey: false // set to false then it wont create in mongodb
-});
+  {
+    versionKey: false, // set to false then it wont create in mongodb
+  }
+);
 
 module.exports = mongoose.model("classStudents", classStudentsSchema);

@@ -2,10 +2,15 @@ const express = require("express");
 const connectDB = require("./config/db");
 const teacher = require("./models/teacher");
 const admin = require("./models/admin");
+const dotenv = require('dotenv');
 const app = express();
 const cors = require("cors");
 const http = require("http");
 const socketio = require("socket.io");
+
+
+dotenv.config();
+
 
 const server = http.createServer(app);
 const io = socketio(server, {

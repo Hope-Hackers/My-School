@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="container">
     <v-container class="grey lighten-5">
       <v-row class="justify-center">
         <v-col>
-          <v-card class="pa-2">
+          <v-card class="pa-6 ma-auto">
             <h5 v-for="(student, index) in dynamicList" :key="index">
               {{ student.name }} Grades :
             </h5>
@@ -105,32 +105,19 @@ export default {
       });
     },
   },
-  async beforeMount() {
-    var parent = await axios.post(
-      "http://localhost:7000/api/users/filterByToken",
-      {
-        token: localStorage.token,
-      }
-    );
-    var classStudent = await axios.post(
-      "http://localhost:7000/api/classStudents/filter",
-      { studentId: parent.data.childId }
-    );
-    this.students = [
-      JSON.parse(JSON.stringify(classStudent.data.classStudents)),
-    ];
+  async beforeMount(){
+    var parent = await axios.post('http://localhost:7000/api/users/filterByToken',{
+      token:localStorage.token
+    })
+    var classStudent = await axios.post("http://localhost:7000/api/classStudents/filter",{studentId:parent.data.childId})
+    this.students = [JSON.parse(JSON.stringify(classStudent.data.classStudents))]
     this.prepareDynamicList();
+    
+    var classSchedule = await axios.post("http://localhost:7000/api/classSchedule/filter",{class:classStudent.data.classStudents.class})
+    console.log(classSchedule.data.classSchedule)
 
-    var classSchedule = await axios.post(
-      "http://localhost:7000/api/classSchedule/filter",
-      { class: classStudent.data.classStudents.class }
-    );
-    console.log(classSchedule.data.classSchedule);
-
-    var grades = await axios.post("http://localhost:7000/api/grades/filter", {
-      name: classStudent.data.classStudents.name.toLowerCase(),
-    });
-    console.log(grades.data);
+    var grades = await axios.post("http://localhost:7000/api/grades/filter",{name:classStudent.data.classStudents.name})
+    console.log(grades.data)
     var item = grades.data;
     delete item._id && delete item.name && delete item.__v;
     for (var key in item) {
@@ -140,6 +127,25 @@ export default {
       });
     }
   },
+  // async mounted() {
+  //   var studentsList = await axios.get(
+  //     "http://localhost:7000/api/classstudents"
+  //   );
+  //   this.students = studentsList.data.splice(0, 1);
+  //   console.log(studentsList.data);
+  //   this.prepareDynamicList();
+  //   this.fetched = true;
+  //   var grade = await axios.get("http://localhost:7000/api/grades");
+  //   var item = grade.data.splice(0, 1)[0];
+  //   delete item._id && delete item.name && delete item.__v;
+  //   for (var key in item) {
+  //     this.fields.push({
+  //       field: key,
+  //       grade: item[key],
+  //     });
+  //   }
+  //   console.log(grade.data.splice(0, 1));
+  // },
 };
 </script>
 

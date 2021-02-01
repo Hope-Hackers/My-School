@@ -36,6 +36,11 @@
         </v-tab-item>
         <v-tab-item>
           <v-container fluid>
+            <Events />
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container fluid>
             <ContactUs />
           </v-container>
         </v-tab-item>
@@ -52,6 +57,7 @@ import AdminTeacherSchedule from "./AdminTeacherSchedule";
 import AdminClassSchedule from "./AdminClassSchedule";
 import AdminUsers from "./AdminUsers";
 import ContactUs from "../admin/ContactAdmin";
+import Events from "./Events.vue";
 
 export default {
   name: "Admin",
@@ -62,6 +68,7 @@ export default {
     AdminTeacherSchedule,
     AdminClassSchedule,
     AdminUsers,
+    Events,
     ContactUs,
   },
   data: () => ({
@@ -72,6 +79,7 @@ export default {
       "Class Schedule",
       "Teacher Schedule",
       "Users Manager",
+      "Events Manager",
       "ContactUs",
     ],
   }),

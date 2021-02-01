@@ -45,9 +45,10 @@ export default {
       );
       this.teacherSchedules = schedules.data.classSchedule;
       var students = await axios.post(
-        "http://localhost:7000/api/classStudents/filter",
+        "http://localhost:7000/api/classStudents/filterstudent",
         { class: this.selected }
       );
+      console.log('students',students)
       this.teacherStudents = students.data.classStudents;
     },
   },

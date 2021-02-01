@@ -17,6 +17,7 @@
     "boxicons": "^2.0.7",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
+    "js-cookie": "^2.2.1",
     "material-icons": "^0.5.2",
     "pubnub-vue": "^1.0.1",
     "socket.io-client": "^2.3.0",

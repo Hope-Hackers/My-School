@@ -33,21 +33,20 @@
                       <v-col cols="12">
                         <v-text-field
                           v-model="loginPassword"
-                          :append-icon="show1 ? 'eye' : 'eye-off'"
+                          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                           :rules="[rules.required, rules.min]"
                           :type="show1 ? 'text' : 'password'"
                           name="input-10-1"
                           label="Password"
                           hint="At least 8 characters"
-                          counter
                           @click:append="show1 = !show1"
                         ></v-text-field>
                       </v-col>
+                      
                       <v-col class="d-flex" cols="12" sm="6" xsm="12"> </v-col>
                       <v-spacer></v-spacer>
                       <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
                         <v-btn
-                          x-large
                           block
                           :disabled="!valid"
                           color="success"
@@ -132,7 +131,6 @@
                           User Created successfully
                         </p>
                         <v-btn
-                          x-large
                           block
                           :disabled="!valid"
                           color="success"
