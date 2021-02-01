@@ -2,17 +2,17 @@
   <div class="container">
     <p class="admintext">All Contact here :</p>
     <div class="d-flex flex-column">
-      <v-card class="pa-2" v-for="item in contact" :key="item">
+      <v-card class="pa-2" v-for="item in contact" :key="item.id">
         <v-card-text>
           <h6><b>Sender : </b>{{ item.name }} {{ item.Lname }}</h6>
-          <h6><b>Email : </b>{{ item.email }}</h6>         
+          <h6><b>Email : </b>{{ item.email }}</h6>
           <div class="text--primary">
             <h6><b>Message : </b></h6>
-            <p class="text--primary">{{ item.message }}</p>  
+            <p class="text--primary">{{ item.message }}</p>
           </div>
         </v-card-text>
       </v-card>
-    </div>  
+    </div>
   </div>
 </template>
 

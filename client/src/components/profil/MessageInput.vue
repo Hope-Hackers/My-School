@@ -54,18 +54,20 @@ export default {
   height: 26px;
 }
 
-textarea {
-  width: 98%;
-  height: 30px;
+textarea[data-v-7a9ba036] {
+  border-radius: 5px;
+  width: 97%;
+  height: 35px;
   padding: 0 5px;
-  margin: 0;
   box-sizing: border-box;
   line-height: 20pt;
   resize: none;
   outline: none;
   font-size: 14px;
   border: solid 1px #aaaaaa;
-  border-radius: 3px;
+  border-radius: 0px 0px 25px 25px;
   font-family: Helvetica;
+  background-color: white;
+  margin-left: 14px;
 }
 </style>

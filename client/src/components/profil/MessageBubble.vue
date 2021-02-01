@@ -71,4 +71,5 @@ export default {
 .message-bubble.me br.me {
   display: none;
 }
+
 </style>

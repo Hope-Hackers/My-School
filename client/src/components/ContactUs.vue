@@ -1,10 +1,5 @@
 <template>
   <div class="container">
-    <div class="custom-breadcrumns border-bottom">
-      <div class="container">
-        <a href="/">Home</a>
-      </div>
-    </div>
     <div class="CTSUP">
       <div id="contact-form" class="contact-form">
         <h1 class="contact-form_title">Contact Form</h1>

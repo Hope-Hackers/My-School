@@ -2,7 +2,7 @@
   <div class="chat-container">
     <div class="heading">
       <!-- uuid : unique user ID -->
-      <h1>{{ " User ID: " + uuid }}</h1>
+      <h1>{{ " User ID: " + this.uuid }}</h1>
     </div>
     <div class="body">
       <div class="table">
@@ -76,26 +76,30 @@ h1 {
 .chat-container {
   display: table;
   max-width: 400px;
-  min-width: 300px;
+  min-width: 920px;
   width: 25%;
   height: 500px;
   margin: auto;
   background-color: #ffffff;
-  border: solid 1px #bfbfbf;
-  border-radius: 3px;
+  border: solid 2px #44a4b1;
+  border-radius: 50px;
   margin-top: 53px;
+  margin-left: 470px;
 }
 
 .heading {
   display: table;
-  width: 100%;
+  width: 95%;
   height: 28px;
   text-align: center;
   background-color: #cdcdcd;
   border-radius: 3px 3px 0 0;
   -ms-user-select: none;
   user-select: none;
-  background: linear-gradient(#ededed 0%, #cdcdcd 75%);
+  background: linear-gradient(#ededed 0%, #17a7a1 75%);
+  margin-left: 23px;
+  border-radius: 289px;
+  margin-top: 3px;
 }
 
 .body {
@@ -110,5 +114,9 @@ h1 {
   display: table;
   width: 100%;
   height: 100%;
+}
+.message-bubble.me .message-text[data-v-dae3de60] {
+  background-color: #9ec6f5;
+  margin-top: 19px;
 }
 </style>
