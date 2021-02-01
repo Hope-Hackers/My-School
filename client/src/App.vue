@@ -59,4 +59,12 @@ html, body {
 nav.navbar.nav.sticky-top.navbar-light.navbar-expand-lg {
     margin-left: 50px;
 }
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+#app {
+  width: 100%;
+} 
 </style>

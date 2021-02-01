@@ -25,7 +25,6 @@ Vue.use(Vuetify);
 Vue.use(Vuesax);
 Vue.use(BootstrapVue);
 
-
 Vue.config.productionTip = false;
 
 const publish_Key = "pub-c-fa43105c-ed88-47fb-a5f1-04b3a289feb3";

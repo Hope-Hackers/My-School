@@ -70,7 +70,10 @@ router.post(
             token: token,
             messangerId: user.messangerId,
             username: user.firstName + " " + user.lastName,
+<<<<<<< HEAD
             role: user.role,
+=======
+>>>>>>> main
           });
         }
       );

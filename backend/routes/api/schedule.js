@@ -4,6 +4,7 @@ const services = require("../../models/schedule");
 
 router.get("/", async (req, res) => {
   try {
+<<<<<<< HEAD
     var Schedules = await services.find({}).sort({ Time: 1 });
     res.send(Schedules);
   } catch (error) {
@@ -14,6 +15,9 @@ router.get("/", async (req, res) => {
 router.get("/withoutid", async (req, res) => {
   try {
     var Schedules = await services.find({}, { _id: 0 }).sort({ Time: 1 });
+=======
+    var Schedules = await services.find({},{_id:0}).sort({"Time":1});
+>>>>>>> main
     res.send(Schedules);
   } catch (error) {
     res.send(error);
@@ -22,6 +26,10 @@ router.get("/withoutid", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
+<<<<<<< HEAD
+=======
+    console.log("req", req.body);
+>>>>>>> main
     var newSchedule = await services.create(req.body);
     res.send(newSchedule);
   } catch (err) {
@@ -29,6 +37,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 router.delete("/delete/:id", async (req, res) => {
   try {
     await services.deleteOne({_id: req.params.id});
@@ -48,4 +57,6 @@ router.post("/update", async (req, res) => {
   }
 });
 
+=======
+>>>>>>> main
 module.exports = router;

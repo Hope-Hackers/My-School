@@ -20,7 +20,6 @@ const mutations = {
       state.history.push(element);
     });
   },
-  //clear requested messages to vuex store
   clearHistory(state){
     state.history=[]
   },
@@ -35,10 +34,6 @@ const mutations = {
 
 //Get Data from vuex store
 const getters = {
-  getMyUuid: (state) => state.me.uuid,
-  getHistoryMsgs: (state) => state.history,
-  getroom: (state) => state.room,
-  getChatMembers: (state) => state.chatMembers,
 };
 
 export default new Vuex.Store({
