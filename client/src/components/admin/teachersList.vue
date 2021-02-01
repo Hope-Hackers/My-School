@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <StudentGrades/>
-    </div>
+  <div>
+    <StudentGradesAdmin />
+  </div>
 </template>
 
 <script>
-    import StudentGrades from '../Teacher/StudentGrades'
-    export default {
-        name: 'TeachersList',
-        components: {
-          StudentGrades
-        },
-    }
+import StudentGradesAdmin from "../Teacher/StudentGradesAdmin";
+export default {
+  name: "TeachersList",
+  components: {
+    StudentGradesAdmin,
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
