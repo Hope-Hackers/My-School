@@ -1,0 +1,7 @@
+{
+  "mongoURI": "mongodb+srv://school:zs23101995@cluster0.nuv5y.mongodb.net/school?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
+  "Cloudinary_Name": "dot4xzf50",
+  "Cloudinary_API_Key": "156192484444877",
+  "Cloudinary_API_Secret": "cqR3vXXtCbURutAgrr4KNF2Hutk"
+}
