@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <b-tabs content-class="mt-3" align="center">
-      <b-tab title="Contact" active
-        ><p class="admintext">All Contact here :</p>
-        <ul v-for="item in contact" :key="item">
-          <li>First Name : {{ item.name }}</li>
-          <li>Last Name : {{ item.Lname }}</li>
-          <li>Email : {{ item.email }}</li>
-          <li>Message : {{ item.message }}</li>
-          <hr /></ul
-      ></b-tab>
-      <b-tab title="schedule"><p>schedule here</p></b-tab>
-      <b-tab title="Event"><p>Event here</p></b-tab>
-    </b-tabs>
+    <p class="admintext">All Contact here :</p>
+    <div class="d-flex flex-column">
+      <v-card class="pa-2" v-for="item in contact" :key="item">
+        <v-card-text>
+          <h6><b>Sender : </b>{{ item.name }} {{ item.Lname }}</h6>
+          <h6><b>Email : </b>{{ item.email }}</h6>         
+          <div class="text--primary">
+            <h6><b>Message : </b></h6>
+            <p class="text--primary">{{ item.message }}</p>  
+          </div>
+        </v-card-text>
+      </v-card>
+    </div>  
   </div>
 </template>
 

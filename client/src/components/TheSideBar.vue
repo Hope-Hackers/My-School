@@ -1,6 +1,6 @@
 <template>
-  <div class="hidden">
-    <vs-sidebar absolute hover-expand reduce v-model="active" open>
+  <div v-if="this.name" class="hidden" id="sidebar">
+    <vs-sidebar id="sidd" absolute reduce hover-expand v-model="active" open>
       <template #logo>
         <vs-avatar>
           <img
@@ -10,83 +10,70 @@
         </vs-avatar>
       </template>
       <h2>{{ this.name }}</h2>
-      <vs-sidebar-item id="home">
-        <template #icon>
-          <i class="bx bx-home" @click="redirectHome"></i>
-        </template>
-        Home
-      </vs-sidebar-item>
-      <vs-sidebar-item id="Profile">
-        <template #icon>
-          <i class="bx bxs-user-rectangle" @click="redirectProfil"></i>
-        </template>
-        Teachers
-      </vs-sidebar-item>
-      <vs-sidebar-item id="chat">
-        <template #icon>
-          <i class="bx bx-chat" @click="redirectChatContainer"></i>
-        </template>
-        Chat
-      </vs-sidebar-item>
-      <vs-sidebar-group>
-        <template #header>
-          <vs-sidebar-item arrow>
-            <template #icon>
-              <i class="bx bx-group"></i>
-            </template>
-            Social media
-          </vs-sidebar-item>
-        </template>
-
-        <vs-sidebar-item id="Instagram">
+      <span @click="redirectHome">
+        <vs-sidebar-item id="home">
           <template #icon>
-            <i class="bx bxl-instagram"></i>
+            <i class="bx bx-home"></i>
           </template>
-          Instagram
+          Home
         </vs-sidebar-item>
-        <vs-sidebar-item id="twitter">
+      </span>
+      <span v-if="this.role == 'Parent'" @click="redirectParentDashboard">
+        <vs-sidebar-item id="market">
           <template #icon>
-            <i class="bx bxl-twitter"></i>
+            <i class='bx bx-grid-alt'></i>
           </template>
-          Twitter
+          Parent Dashboard
         </vs-sidebar-item>
-        <vs-sidebar-item id="Facebook">
+      </span>
+      <span v-if="this.role == 'Admin'" @click="redirectAdminDashboard">
+        <vs-sidebar-item id="market">
           <template #icon>
-            <i class="bx bxl-facebook"></i>
+            <i class='bx bx-grid-alt'></i>
           </template>
-          Facebook
+          Admin Dashboard
         </vs-sidebar-item>
-      </vs-sidebar-group>
-
-      <vs-sidebar-item id="Calendar">
-        <template #icon>
-          <i class="bx bx-calendar"></i>
-        </template>
-        Calendar
-      </vs-sidebar-item>
+      </span>
+      <span v-if="this.role == 'Teacher'" @click="redirectTeacherDashboard">
+        <vs-sidebar-item id="market">
+          <template #icon>
+            <i class='bx bx-grid-alt'></i>
+          </template>
+          Teacher Dashboard
+        </vs-sidebar-item>
+      </span>
+      <span @click="redirectProfil">
+        <vs-sidebar-item id="Profile">
+          <template #icon>
+            <i class="bx bxs-user-rectangle"></i>
+          </template>
+          Teachers
+        </vs-sidebar-item>
+      </span>
+      <span @click="redirectChatContainer">
+        <vs-sidebar-item id="chat">
+          <template #icon>
+            <i class="bx bx-chat"></i>
+          </template>
+          Chat
+        </vs-sidebar-item>
+      </span>
+      <span @click="redirectEvent">
       <vs-sidebar-item id="Event">
         <template #icon>
           <i class="bx bxs-calendar-event"></i>
         </template>
         Event
       </vs-sidebar-item>
-      <vs-sidebar-item id="Contact Us">
-        <template #icon>
-          <i class="bx bx-support" @click="redirectContactUs"></i>
-        </template>
-        Contact Us
-      </vs-sidebar-item>
-      <template #footer>
-        <vs-row justify="space-between">
-          <vs-avatar badge-color="danger" badge-position="top-right">
-            <i class="bx bx-bell"></i>
-
-            <template #badge>
-              28
-            </template>
-          </vs-avatar>
-        </vs-row>
-      </template>
+      </span>
+      <span @click="redirectContactUs">
+        <vs-sidebar-item id="Contact Us">
+          <template #icon>
+            <i class="bx bx-support"></i>
+          </template>
+          Contact Us
+        </vs-sidebar-item>
+      </span>
     </vs-sidebar>
   </div>
 </template>
@@ -105,15 +92,27 @@ export default {
       this.$router.push("/Profil");
     },
     redirectChatContainer() {
-      this.$store.commit("setroom", 5106);
       this.$router.push("/ChatStructure");
     },
     redirectContactUs() {
       this.$router.push("/ContactUs");
     },
+    redirectParentDashboard() {
+      this.$router.push("/parent");
+    },
+    redirectAdminDashboard() {
+      this.$router.push("/admin");
+    },
+    redirectTeacherDashboard() {
+      this.$router.push("/teacher");
+    },
+    redirectEvent() {
+      this.$router.push("/events");
+    },
   },
   mounted() {
     this.name = localStorage.getItem("Username");
+    this.role = localStorage.getItem("Role");
   },
 };
 </script>

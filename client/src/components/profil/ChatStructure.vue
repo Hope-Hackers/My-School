@@ -20,7 +20,12 @@
               :key="item.name"
             >
               <td>{{ item.name }}</td>
-              <v-btn class="redmsg" @click="redirectMsg">
+              <v-btn
+                v-for="type in types"
+                :key="type"
+                class="redmsg"
+                @click="redirectMsg(item.id), handleClickLoading(type)"
+              >
                 Message
               </v-btn>
             </tr>
@@ -32,30 +37,55 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
-      ChatTeachers: [
-        {
-          name: "Melek Houidi",
-        },
-        {
-          name: "Khaled Yeferni ",
-        },
-        {
-          name: "Zied sradki ",
-        },
-        {
-          name: "Wael Jouini ",
-        },
-      ],
+      hasOpenLoading: false,
+      types: ["square"],
     };
   },
   methods: {
-    redirectMsg() {
-      this.$store.commit("setroom", 123);
+    redirectMsg(x) {
+      this.$store.commit("setroom", x);
       this.$router.push({ path: "/ChatContainer", addToHistory: false });
     },
+    handleClickLoading(type) {
+      const loading = this.$vs.loading({
+        type,
+      });
+      this.hasOpenLoading = true;
+      setTimeout(() => {
+        loading.close();
+        this.hasOpenLoading = false;
+      }, 3000);
+    },
+    openLoading(type, ref) {
+      this.$vs.loading({
+        target: this.$refs[ref][0],
+        text: type,
+        type,
+      });
+    },
+    mounted() {
+      this.types.forEach((type, i) => {
+        this.openLoading(type, `box${i}`);
+      });
+    },
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:7000/api/messages/users?id=${this.uuid}`)
+      .then((response) => {
+        this.$store.commit("setChatMembers", response.data);
+      });
+  },
+  computed: {
+    ...mapGetters({
+      uuid: "getMyUuid",
+      ChatTeachers: "getChatMembers",
+    }),
   },
 };
 </script>

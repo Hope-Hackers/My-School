@@ -1,43 +1,52 @@
 <template>
-  <div id="contact-form" class="contact-form">
-    <h1 class="contact-form_title">Contact Form</h1>
-    <div class="separator"></div>
+  <div class="container">
+    <div class="custom-breadcrumns border-bottom">
+      <div class="container">
+        <a href="/">Home</a>
+      </div>
+    </div>
+    <div class="CTSUP">
+      <div id="contact-form" class="contact-form">
+        <h1 class="contact-form_title">Contact Form</h1>
+        <div class="separator"></div>
 
-    <div v-if="isSending" class="loading">Sendig...</div>
+        <div v-if="isSending" class="loading">Sendig...</div>
 
-    <form class="form" @submit="onSubmit">
-      <input
-        required
-        name="First name"
-        v-model="contact.name"
-        placeholder="First Name"
-        type="text"
-        autocomplete="off"
-      />
-      <input
-        required
-        name="Last name"
-        v-model="contact.Lname"
-        placeholder="Last name"
-        type="text"
-        autocomplete="off"
-      />
-      <input
-        required
-        name="email"
-        v-model="contact.email"
-        placeholder="E-mail"
-        type="email"
-        autocomplete="off"
-      />
-      <textarea
-        name="message"
-        v-model="contact.message"
-        rows="4"
-        placeholder="Message"
-      ></textarea>
-      <button class="button">Send</button>
-    </form>
+        <form class="form" @submit="onSubmit">
+          <input
+            required
+            name="First name"
+            v-model="contact.name"
+            placeholder="First Name"
+            type="text"
+            autocomplete="off"
+          />
+          <input
+            required
+            name="Last name"
+            v-model="contact.Lname"
+            placeholder="Last name"
+            type="text"
+            autocomplete="off"
+          />
+          <input
+            required
+            name="email"
+            v-model="contact.email"
+            placeholder="E-mail"
+            type="email"
+            autocomplete="off"
+          />
+          <textarea
+            name="message"
+            v-model="contact.message"
+            rows="4"
+            placeholder="Message"
+          ></textarea>
+          <button class="button">Send</button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,10 +60,8 @@ export default {
       email: "",
       message: "",
     },
-
     isSending: false,
   }),
-
   methods: {
     /**
      * Clear the form
@@ -64,22 +71,18 @@ export default {
         this.contact[field] = "";
       }
     },
-
     /**
      * Handler for submit
      */
     onSubmit(evt) {
       evt.preventDefault();
-
       this.isSending = true;
-
       setTimeout(() => {
         // Build for data
         let form = new FormData();
         for (let field in this.contact) {
           form.append(field, this.contact[field]);
         }
-
         // Send form to server
         axios
           .post("http://localhost:7000/api/contact/ContactUs", this.contact)
@@ -140,17 +143,13 @@ div#contact-form {
   resize: none;
 }
 .contact-form .button {
-  background: #da552f;
-  border: solid 1px #da552f;
+  background: #0e3ba0e3;
+  border: solid 1px #0d0dfb;
   color: white;
   cursor: pointer;
   padding: 10px 50px;
   text-align: center;
   text-transform: uppercase;
-}
-.contact-form .button:hover {
-  background: #ea532a;
-  border: solid 1px #ea532a;
 }
 .contact-form input[type="email"],
 .contact-form input[type="text"],
@@ -158,5 +157,8 @@ div#contact-form {
 .contact-form .button {
   font-size: 15px;
   border-radius: 3px;
+}
+.CTSUP {
+  margin-top: -82px;
 }
 </style>
