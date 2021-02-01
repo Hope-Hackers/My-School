@@ -253,7 +253,7 @@ export default {
           this.editedItem
         );
         console.log(created.data);
-        if (created.data.status) {
+        if (created.data) {
           this.$vs.notification({
             text: "Added successfully",
             title: "Notification",

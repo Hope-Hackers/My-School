@@ -4,7 +4,6 @@ const services = require("../../models/classSchedule");
 
 router.get("/", async (req, res) => {
   try {
-<<<<<<< HEAD
     var ClassSchedules = await services.find({});
     res.send(ClassSchedules);
   } catch (error) {
@@ -15,9 +14,6 @@ router.get("/", async (req, res) => {
 router.get("/findwithoutid", async (req, res) => {
   try {
     var ClassSchedules = await services.find({}, { _id: 0 }).sort({ time: 1 });
-=======
-    var ClassSchedules = await services.find({},{_id:0}).sort({"time":1});
->>>>>>> main
     res.send(ClassSchedules);
   } catch (error) {
     console.log(error);
@@ -27,20 +23,13 @@ router.get("/findwithoutid", async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     console.log("req", req.body);
-<<<<<<< HEAD
     var newClassSchedule = await services.create(req.body);
-=======
-    var newClassSchedule = await services.classScheduleServices.createClassSchedule(
-      req.body
-    );
->>>>>>> main
     res.send(newClassSchedule);
   } catch (err) {
     console.log(err);
   }
 });
 
-<<<<<<< HEAD
 router.delete("/delete/:id", async (req, res) => {
   try {
     await services.deleteOne({ _id: req.params.id });
@@ -82,6 +71,4 @@ router.post('/filterid', async (req, res) => {
   }
 })
 
-=======
->>>>>>> main
 module.exports = router;

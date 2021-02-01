@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <p class="admintext">All Contact here :</p>
-    <div class="d-flex flex-column">
-      <v-card class="pa-2" v-for="item in contact" :key="item">
+    <div class="d-flex flex-column mb-6">
+      <v-card class="pa-2" outlined tile v-for="item in contact" :key="item">
         <v-card-text>
           <h6><b>Sender : </b>{{ item.name }} {{ item.Lname }}</h6>
           <h6><b>Email : </b>{{ item.email }}</h6>         

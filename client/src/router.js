@@ -57,12 +57,12 @@ export default new Router({
         },
         {
           path: "Login",
-          component: () => import("./components/Login.vue"),
+          component: () => import("./components/login.vue"),
           index: 0,
         },
         {
           path: "Register",
-          component: () => import("./components/Login.vue"),
+          component: () => import("./components/login.vue"),
           index: 1,
         },
         {

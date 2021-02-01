@@ -4,11 +4,7 @@ const services = require("../../models/grades");
 
 router.get("/", async (req, res) => {
   try {
-<<<<<<< HEAD
     var Grades = await services.find({});
-=======
-    var Grades = await services.find({}, { _id: 0 });
->>>>>>> main
     res.send(Grades);
   } catch (error) {
     res.send(error);
@@ -38,19 +34,14 @@ router.post("/update", async (req, res) => {
   try {
     var newGrade = await services.findOneAndUpdate(
       { _id: req.body._id },
-<<<<<<< HEAD
       req.body,
       { useFindAndModify: false }
-=======
-      req.body
->>>>>>> main
     );
     res.send({ newGrade, status: true });
   } catch (err) {
     res.send({ err, status: false });
   }
 });
-<<<<<<< HEAD
 router.post("/filter", async (req, res) => {
   try {
     var grades = await services.findOne(req.body)
@@ -59,7 +50,4 @@ router.post("/filter", async (req, res) => {
     res.send({ err, status: false });
   }
 });
-=======
-
->>>>>>> main
 module.exports = router;
